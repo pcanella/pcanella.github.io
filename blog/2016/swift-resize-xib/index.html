@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Resizing a XIB Interface using Swift, the dynamic way!</title>
+<meta name="description" content="Right now I’m kind of teaching myself Swift and iOS programming because:">
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="canonical" href="http://pcanella.github.io/blog/2016/swift-resize-xib/">
+<link rel="alternate" type="application/rss+xml" title="Patrick Canella" href="http://pcanella.github.io/feed.xml" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52446115-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+</head>
+<body>
+  <header class="site-header">
+  <div class="container">
+    <input type="checkbox" id="toggleNavbar">
+    <h1 class="logo"><a href="/">Patrick Canella</span></a></h1>
+    <label for="toggleNavbar" role="button" class="toggle-navbar-button">
+      <i class="icon icon-menu"></i>
+      <i class="icon icon-cross"></i>
+    </label>
+    <nav class="navbar">
+      <ul>
+        <li><a href="/" title="Home">Home</a></li>
+        
+          <li><a href="/about" title="About">About</a></li>
+        
+          <li><a href="/blog" title="Blog">Blog</a></li>
+        
+          <li><a href="/resume" title="Resume">Resume</a></li>
+        
+        <li><a href="/feed.xml" target="_blank"><i class="icon icon-rss"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<main class="main-container">
+  <div class="container">
+    <article role="article" class="post">
+
+  <div class="card">
+    <header class="post-header">
+      <h1 class="post-title">Resizing a XIB Interface using Swift, the dynamic way!</h1>
+      <em class="post-meta">
+        <time>May 18, 2016</time>
+      </em>
+    </header>
+
+    <div class="post-content">
+      
+      <p>Right now I’m kind of teaching myself Swift and iOS programming because:</p>
+
+<ul>
+  <li>Swift is a badass language</li>
+  <li>iOS coding is fun and different than the web</li>
+  <li>It’s fun!</li>
+</ul>
+
+<p>One of the issues I had the other day was finding a simple, easy way to programatically resize a XIB file (specifically for a custom keyboard I am working on). I searched high and low on stackoverflow and Google, but to no avail. I kept thinking “OKAY someone has to know how to do this or has done this.”</p>
+
+<p>So I found this simple example using <code>UITextField</code> and tried to apply it to my XIB view. AND IT WORKED GREAT.</p>
+
+<p>So I’ll guide you through how to do this in Swift. This tutorial requires a basic understanding of XCode and the Storyboard features.</p>
+
+<h2 id="prerequisite-knowledge">PREREQUISITE KNOWLEDGE</h2>
+<ul>
+  <li>Swift syntax/semantics</li>
+  <li>Storyboard</li>
+  <li>ViewController</li>
+  <li>ViewController Button binding</li>
+</ul>
+
+<h2 id="step-one-hooking-up-the-viewcontroller-with-its-xib">STEP ONE: Hooking up the ViewController with it’s XIB</h2>
+
+<p>You’ll want to create a regular old “View” in XCode. Once that is done, choose <code>Add File</code> from the <em>File</em> menu.</p>
+
+<p>Then you’ll want to click on your XIB in the Storyboard editor and click on the “File’s Owner” object/cube. Finally, go over to the File Owner’s Identity Inspector and change it’s class to <em>YourViewController</em> (whatever you named it). Cool!</p>
+
+<p>In your <code>ViewController</code> we want to make sure we have a reference to our XIB. So we’ll want to add something like this:</p>
+
+<pre><code>    var myXibView: UIView!
+</code></pre>
+
+<p>Our XIB is connected to our ViewController file. Let’s move on.</p>
+
+<h2 id="step-two-changing-attributes-of-the-view">STEP TWO: Changing Attributes of the View.</h2>
+
+<p>Once the <code>Viewcontroller</code> class is hooked up with the XIB’s <code>File's Owner</code> object, head on over to the Attributes Inspector and change the following settings in the dropdown menus (<code>Size</code> is the most important here):</p>
+
+<ul>
+  <li><code>Size - Freeform</code></li>
+  <li><code>Orientation - Inferred</code></li>
+  <li><code>Status Bar - None</code></li>
+  <li><code>Top Bar - None</code></li>
+  <li><code>Bottom Bar - Inferred</code></li>
+</ul>
+
+<p>Got that? Awesome. So <code>Freeform</code> is important to allow changing the size of the layout.</p>
+
+<h2 id="step-two-adding-a-simple-button-to-trigger-the-resize">STEP TWO: Adding a simple button to trigger the resize</h2>
+
+<p>Next, let’s go ahead and add a button to the view. For this example, it doesn’t have to be fancy at all. Then, bind the button to your <code>ViewController</code> with an <code>@IBAction</code> func. For example, here is mine:</p>
+
+<pre><code> @IBAction func onExpandoClick(sender: AnyObject) {
+        self.resizeXib(); // or any other custom method here
+    }
+
+</code></pre>
+
+<h2 id="step-three-the-resize-function">STEP THREE: The resize function!</h2>
+
+<p>Finally, we will create a simple function to resize your XIB.</p>
+
+<pre><code>    func resizeXib(){
+        var testRect: CGRect = self.myXibView.frame
+        testRect.size.height = 400;
+        self.myXibView.frame = testRect;
+    }
+</code></pre>
+
+<h2 id="done">DONE!</h2>
+
+<p>That’s all there is to it; on your button click the XIB will resize to 400! Obviously there are a lot of customizations you can make here including animations, etc. But there you go! If you have any questions, feel free to reach out patrickcanella at gmail dot com!</p>
+
+    </div>
+
+    
+
+  </div>
+
+</article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="social">
+  <li><a href="https://github.com/pcanella" target="_blank"><i class="icon icon-github"></i></a></li>
+  <li><a href="https://twitter.com/pcanella" target="_blank"><i class="icon icon-twitter"></i></a></li>
+  <li><a href="https://linkedin.com/in/patrickcanella" target="_blank"><i class="icon icon-linkedin"></i></a></li>
+</ul>
+
+    <p class="txt-medium-gray">
+      <small>&copy;2019 All rights reserved. Made with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a>, <a href="https://nandomoreirame.github.io/end2end/" target="_blank">The Free End2End Theme</a> and ♥</small>
+    </p>
+  </div>
+</footer>
+
+
+  <a href="http://github.com/pcanella" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#337ab7; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+</body>
+</html>
