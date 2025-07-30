@@ -1,0 +1,123 @@
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    height: 100%;
+
+    div[aria-hidden="true"] {
+        display: none;
+    }
+}
+
+div[aria-hidden="true"] {
+    display: none;
+}
+
+.mainWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // height: 900px;
+
+    .mainHeader {
+
+        margin-top: 5px;
+        margin-bottom: 5px;
+
+        .patrick {
+            margin-bottom: 0;
+            color: rgb(76, 98, 199);
+        }
+
+
+    }
+
+    h3 {
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+        font-size: 14px;
+    }
+
+    img {
+        // border: 1px solid black;
+    }
+
+    div {
+        margin-top: 0.3rem;
+    }
+}
+
+.welcome {
+    font-weight: bold;
+    font-family: "Geneva", sans-serif;
+}
+
+.selfportrait {
+    border: 3px solid black;
+}
+
+.houseemoji {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.startupWindow {
+    width: auto;
+    height: 1000px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 3%;
+
+    .startingUpProgressBar {
+        border: 1px solid black;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+
+        &[value]::-webkit-progress-bar {
+            background: rgb(66, 66, 66);
+            border: 1px solid black;
+        }
+
+        &[value]::-webkit-progress-value {
+            background: rgb(80, 98, 199);
+        }
+    }
+
+    .patOsText1 {
+        font-family: "EB Garamond", serif;
+        font-size: 160px;
+        padding-right: 20px;
+    }
+
+    .patOsText2 {
+        font-family: "EB Garamond", serif;
+        color: rgb(80, 98, 199);
+        font-size: 200px;
+    }
+
+    .startupWindowContent {
+        width: 700px;
+        height: 600px;
+        background: rgb(222, 222, 222);
+        border: 1px solid black;
+        border-right: 2px solid black;
+
+        font-size: 22px;
+        font-family: "Chicago", sans-serif;
+
+        .startupWindowInnerContent {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            height: 100%;
+            align-items: center;
+            padding-bottom: 3rem;
+        }
+    }
+}

@@ -1,0 +1,136 @@
+---
+import styles from "./style.module.scss";
+const { header, x, y, width, height, dragId = 0, hidden = false } = Astro.props;
+const draggableId = `draggable-${dragId}`;
+const retroWindowHeaderId = `retroWindowHeader-${dragId}`;
+const resizeBoxId = `resizeBoxId-${dragId}`;
+
+---
+
+<div
+    aria-hidden={hidden}
+    id={draggableId}
+    class={styles.retroWindow}
+    style="width: {width}; min-width: {width}"
+    data-x={x}
+    data-y={y}
+>
+    <div id={retroWindowHeaderId} class={styles.header}>
+        <div class={styles.backgroundOfHeader}>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+        </div>
+        <div class={styles.middleHeader}>{header}</div>
+
+        <div class={styles.backgroundOfHeader}>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+            <span class={styles.decorLine}></span>
+        </div>
+        <div class={styles.rightHeaderSide}></div>
+    </div>
+    <span class={styles.firstBorder}></span>
+    <span class={styles.secondBorder}></span>
+
+    <div class={styles.mainContent}>
+        <div class={styles.body} id={resizeBoxId} style="visibility: hidden;">
+            <slot />
+        </div>
+    </div>
+
+    <!-- <div class={styles.footer}>
+        <div id={resizeBoxId}>
+            <img src="/src/assets/resize-button.png" width="20"/>
+        </div>
+    </div> -->
+</div>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"
+></script> -->
+
+<script
+    define:vars={{ draggableId, retroWindowHeaderId, resizeBoxId }}
+    type="module"
+>
+
+    setTimeout(
+        () =>
+            (document.querySelector(`#${resizeBoxId}`).style =
+                "visibility: visible"),
+        500,
+    );
+
+    // target elements with the "draggable" class
+    const position = { x: 0, y: 0 }
+
+    interact(`#${draggableId}`).draggable({
+        // enable inertial throwing
+        // inertia: false,
+        allowFrom: `#${retroWindowHeaderId}`,
+        // keep the element within the area of it's parent
+        modifiers: [
+            interact.modifiers.restrictRect({
+                restriction: ".mainWindow",
+                // endOnly: true,
+            }),
+        ],
+        // autoScroll: true,
+
+        listeners: {
+            // call this function on every dragmove event
+            move(event) {
+                position.x += event.dx;
+                position.y += event.dy;
+
+                event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+            },
+
+            // call this function on every dragend event
+            // end(event) {
+            //     var textEl = event.target.querySelector("p");
+
+            //     textEl &&
+            //         (textEl.textContent =
+            //             "moved a distance of " +
+            //             Math.sqrt(
+            //                 (Math.pow(event.pageX - event.x0, 2) +
+            //                     Math.pow(event.pageY - event.y0, 2))
+            //             ).toFixed(2) +
+            //             "px");
+            // },
+        },
+    });
+
+    function dragMoveListener(event) {
+        var target = event.target;
+        // keep the dragged position in the data-x/data-y attributes
+        var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+        var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+        // translate the element
+        target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+        // update the posiion attributes
+        target.setAttribute("data-x", x);
+        target.setAttribute("data-y", y);
+    }
+
+    // this function is used later in the resizing and gesture demos
+    window.dragMoveListener = dragMoveListener;
+</script>
+<!-- 
+<script define:vars={{ x, y }}>
+    function moveBox({ x }, { y }) {
+        const box = document.getElementById("draggable");
+        if (box) {
+            box.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    }
+    // debugger;
+    moveBox({ x }, { y });
+</script> -->

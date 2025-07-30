@@ -1,0 +1,71 @@
+.iconButton {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+
+    
+    .hardDriveBox {
+        width: 50px;
+        height: 10px;
+        background: white;
+
+        margin: 0 auto;
+        margin-bottom: 3px;
+        border: 1px black dotted;
+        display: flex;
+        align-items: anchor-center;
+        color: #afadad;
+
+        .hardDriveNub {
+            padding-top: 1px;
+            font-weight: bold;
+            padding-left: 2px;
+        }
+    }
+
+    // &[data-single-click="false"] {
+    //     .hardDriveBox {
+    //         // background: gray;
+    //         color: white;
+    //         .hardDriveNub {
+    //             color: rgb(64, 63, 63);
+    //         }
+    //     }
+    // }
+
+    &[data-single-click="true"]{
+        .hardDriveBox {
+            background: gray;
+            color: white;
+            .hardDriveNub {
+                color: rgb(64, 63, 63);
+            }
+        }
+
+        .innerText {
+            color: white;
+            background: black;
+        }
+    }
+
+    .innerText {
+        font-size: 10px;
+        font-family: "Geneva", sans-serif;
+        background: white;
+        border: 1px gray dotted;
+        padding-left: 1px;
+        padding-right: 1px;
+        opacity: 1.0;
+        // width: 65px;
+    }
+}
+
+.iconButtonSingleClicked {
+    background: red;
+}

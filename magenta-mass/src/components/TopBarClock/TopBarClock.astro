@@ -1,0 +1,32 @@
+---
+import styles from "./style.module.scss";
+---
+
+<div class={styles.topClockBar}>
+    <div id="clock" class={styles.clock}>
+        <span id="hours">--</span>
+        <span class={styles.colon}>:</span>
+        <span id="minutes">--</span>
+        <span class={styles.ampm} id="ampm"></span>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const rawHours = now.getHours()
+            let hours = now.getHours().toString().padStart(2, "0");
+            let minutes = now.getMinutes().toString().padStart(2, "0");
+
+            let ampm = rawHours >= 12 ? 'PM' : 'AM';
+            hours = String(rawHours % 12 || 12); 
+
+            document.getElementById('hours').innerHTML = hours;
+            document.getElementById('minutes').innerHTML = minutes;
+            document.getElementById('ampm').innerHTML = ampm;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to avoid delay
+    </script>
+    
+</div>

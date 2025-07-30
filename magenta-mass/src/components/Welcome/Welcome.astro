@@ -1,0 +1,136 @@
+---
+import background from "../../assets/background.svg";
+import TopBar from "./../TopBar/TopBar.astro";
+import RetroWindow from "./../RetroWindow/RetroWindow.astro";
+import { progress, isStartingUp } from "../../store.js";
+import IconButton from "../IconButton/IconButton.astro";
+import styles from "./style.module.scss";
+import topMenuItems from '../../models/TopMenuItems';
+---
+<script type="module" src="/src/assets/scripts/register-components.ts"></script>
+
+<div class={styles.container} id="container">
+	<!-- <MenuSnippet/> -->
+	<div
+		id="startupContent"
+		aria-hidden={!isStartingUp.value}
+		class={styles.startupWindow}
+	>
+		<div class={styles.startupWindowContent}>
+			<div class={styles.startupWindowInnerContent}>
+				<div class={styles.patOsText}>
+					<span class={styles.patOsText1}>Pat</span>
+					<span class={styles.patOsText2}>OS</span>
+				</div>
+				<span class={styles.startingUpText}>Starting up...</span>
+
+				<progress
+					id="startuploader"
+					max="100"
+					value={String(progress)}
+					class={styles.startingUpProgressBar}></progress>
+			</div>
+		</div>
+	</div>
+
+	<div id="mainContent" aria-hidden={isStartingUp.value}>
+		<TopBar />
+		<main class="mainWindow">
+			<IconButton/>
+			<RetroWindow
+				id="mainWindow"
+				x={0}
+				y={100}
+				width={800}
+				header="Welcome!"
+			>
+				<section class={styles.mainWindow}>
+					<h2 class={styles.mainHeader}>
+						Hi! I'm <span class={styles.patrick}>Patrick.</span>
+					</h2>
+					<img
+						class={styles.selfportrait}
+						src="/src/assets/self.png"
+						width="200"
+					/>
+					<div class={styles.welcome}>
+						And welcome to my little web home! <img
+							class={styles.houseemoji}
+							src="/src/assets/houseemoji.jpg"
+						/>
+					</div>
+				</section>
+			</RetroWindow>
+
+			<RetroWindow
+				dragId="macintoshhdwindow"
+				hidden={true}
+				x={600}
+				y={100}
+				header="Patrick's Macintosh HD"
+				>Patrick's
+			</RetroWindow>
+		
+		</main>
+	</div>
+
+	
+</div>
+
+
+<script>
+	import { isPatricksMacOpen, isStartingUp, progress } from "../../store.js";
+
+	function fakeLoad() {
+		let value = 0; 
+
+		function step() {
+			if (value >= 100) return;
+			// Simulate jittery increments
+			const increment = Math.floor(Math.random() * 5) + 1;
+			value = Math.min(100, value + increment);
+
+			progress.set(value);
+
+			// Add nostalgic slowness
+			const delay = Math.random() * 100 + 100; // 100ms–400ms
+			setTimeout(step, delay);
+		}
+
+		step();
+	}
+
+	// Start loading when page is ready
+	document.addEventListener("DOMContentLoaded", fakeLoad);
+
+	const mainWindow = document.getElementById("draggable-mainWindow");
+	mainWindow?.setAttribute("aria-hidden", "true");
+	setTimeout(() => {
+		isStartingUp.set(false);
+	}, 0); // TODO: ON LAUNCH CHANGE TO 6000
+
+	isPatricksMacOpen.subscribe((profile) => {
+		if (isPatricksMacOpen.value === true) {
+			const macWindow = document.getElementById(
+				"draggable-macintoshhdwindow",
+			);
+			macWindow?.setAttribute("aria-hidden", "false");
+		}
+	});
+
+	progress.subscribe(() => {
+		const progressBar = document.getElementById("startuploader");
+		progressBar?.setAttribute('value', String(progress.value));
+
+		if (progressBar?.getAttribute('value') === String(100)) {
+			isStartingUp.set(false);
+		}
+	})
+
+	isStartingUp.subscribe((profile) => {
+		if (isStartingUp.value === false) {
+			document.getElementById('mainContent')?.setAttribute('aria-hidden', 'false');
+			document.getElementById('startupContent')?.setAttribute('aria-hidden', 'true')
+		}
+	});
+</script>

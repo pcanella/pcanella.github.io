@@ -1,0 +1,127 @@
+:global(#mainContent) {
+    height: 100%;
+    width: 100%;
+}
+
+.retroWindow {
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+
+    font-family: "Chicago", sans-serif;
+    width: 300px;
+    height: 400px;
+    background: white;
+    min-height: 220px;
+    min-width: 400px;
+    max-width: 400px;
+    max-height: 350px;
+    background: white;
+    // border: 2px solid black;
+    border-left: none;
+    border-radius: 3px;
+    overflow: scroll;
+    resize: both;
+    border-right: 3.5px solid black;
+    border-bottom: 3.5px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    .header {
+        // flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // border-right: 3px solid black;
+        width: 100%;
+        position:sticky;
+        top: 0;
+    }
+
+
+
+}
+
+.firstBorder {
+    display: block;
+    border-bottom: 1px solid rgb(137, 137, 173);
+}
+
+.secondBorder {
+    border-bottom: 1px solid black;
+    display: block;
+}
+
+.middleHeader {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    background-color: rgb(238, 238, 238);
+    font-size: 16px;
+    height: 15px;
+    font-family: "Chicago", sans-serif;
+    // margin-bottom: 0.1rem;
+    padding-bottom: 0.2rem;
+}
+
+.backgroundOfHeader {
+    position: absolute;
+    // flex-direction: column;
+    height: 15px;
+    width: 100%;
+    position: relative;
+    background-color: rgb(238, 238, 238);
+
+    .decorLine {
+        width: 100%;
+        border-top: 1px solid rgb(150, 150, 150);
+        // padding-top: 0.1rem;
+        display: block;
+        height: 2px;
+    }
+
+}
+
+.mainContent {
+    background: white;
+    // height: 100%;
+    // width: 100%;
+    // overflow: scroll;
+    // overflow: scroll;
+    // resize: both;
+    // border-right: 3.5px solid black;
+    // resize: both;
+    // border-right: 3px solid black;
+    // border-left: 2px solid black;
+    // box-sizing: border-box;
+    // border-right: 3.5px solid black;
+    // margin-bottom: 2rem;
+
+    .body {
+        // overflow: scroll; 
+        // flex-grow: 1;
+        // height: 1000px;
+    }
+}
+
+.footer {
+    // position: absolute;
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: flex;
+    bottom: 0;
+    height: 20px;
+    width: 100%;
+    z-index: 10;
+    background-color: rgb(238, 238, 238);
+    justify-content: end;
+    // border: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 2px solid black;
+    // border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    margin-right: 2rem;
+    // box-sizing: border-box;
+    // overflow-x: scroll;
+
+    border-right: 3px solid black;
+}

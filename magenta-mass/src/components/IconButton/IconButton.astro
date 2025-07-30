@@ -1,0 +1,40 @@
+---
+import styles from "./style.module.scss";
+const { onOpen } = Astro.props;
+---
+<button id="iconBtn" data-single-click="false" class={styles.iconButton}>
+    <div class={styles.iconButtonContainer}>
+        <div id="hdBox" class={styles.hardDriveBox}>
+            <div class={styles.hardDriveNub}>-</div>
+        </div>
+        <div class={styles.innerText}>Patrick's Mac</div>
+
+    </div>
+
+    
+</button>
+
+<script>
+    import { isHardDriveClicked, isPatricksMacOpen } from '../../store.js';
+
+    const btn = document.querySelector('#iconBtn');
+
+    document.addEventListener('click', (e) => {
+        if (e?.target?.id === 'hdBox' || e?.target?.offsetParent?.id === 'iconBtn') {
+            isHardDriveClicked.set(true);
+        // alert(isHardDriveClicked.value);
+            
+        } else {
+            isHardDriveClicked.set(false);
+        }
+        btn?.setAttribute('data-single-click', String(isHardDriveClicked.value));
+    });
+
+    document.addEventListener('dblclick', (e) => {
+        if (e?.target?.id === 'hdBox' || e?.target?.offsetParent?.id === 'iconBtn') {
+            isPatricksMacOpen.set(true);
+            //onOpen?.();
+        }
+    });
+
+</script>
