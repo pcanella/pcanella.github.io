@@ -28,26 +28,28 @@ body {
 
 ::-webkit-scrollbar {
     width: 20px;
-    height:20px;
-  }
+    height: 20px;
+}
 
 
-  ::-webkit-resizer {
+::-webkit-resizer {
 
-        width: 0.4rem;
+    width: 2.6rem;
     height: 0.4rem;
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: -50px;
     background-image: url("/src/assets/resize-button.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
     border: 1px solid black;
+    // border-right: 7px solid black;
     // display: none;
     z-index: 999;
 
-  }
+}
+
 //     width: 0.4rem;
 //     height: 0.4rem;
 //     position: absolute;
@@ -145,9 +147,34 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: radial-gradient(circle, #b0b0b0 20%, transparent 20%), 
-                radial-gradient(circle,  #b0b0b0 20%, transparent 20%);
-    background-size: 6px 6px; /* Smaller dots */
-    background-position: 0 0, 3px 9px; /* Staggered effect */
-    background-color: #d0d0d0; /* Track background */
-  }
+    background: radial-gradient(circle, #b0b0b0 20%, transparent 20%),
+        radial-gradient(circle, #b0b0b0 20%, transparent 20%);
+    background-size: 6px 6px;
+    /* Smaller dots */
+    background-position: 0 0, 3px 9px;
+    /* Staggered effect */
+    background-color: #d0d0d0;
+    /* Track background */
+}
+
+
+.mainContent,
+#mainContent {
+    height: 100%;
+
+    .body {
+        height: 100%;
+        overflow: scroll;
+        resize: both;
+        background: white;
+
+        border-right: 3.5px solid black;
+        border-bottom: 3.5px solid black;
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        max-width: 500px;
+        max-height: 400px;
+        min-width: 300px;
+        min-height: 200px;
+    }
+}

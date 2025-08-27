@@ -9,58 +9,58 @@ template.innerHTML = `
 `;
 
 class MacintoshMenuItem extends HTMLElement {
-    private shadow: ShadowRoot | null = null;
+
     private item: any = null;
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
         shadow.appendChild(template.content.cloneNode(true));
-        this.shadow = shadow;
         this.item = shadow?.querySelector('.macintosh-menu-item');
     }
 
     handleTimeoutClickEffect(e) {
-
+        const linkHref = this?.getAttribute('href');
+        const clickHandler = this?.getAttribute('onclick');
         // if (e.target.id === scope("menu-item")) {
         // We want it to blink and THEN go to the href properly
         e.preventDefault();
-        const listItemEl = this.shadowRoot.querySelector('li');
+        const listItemEl = this.shadowRoot?.querySelector('li');
         listItemEl?.classList.add("is-clicked");
         setTimeout(() => {
             // window.open(e.target.href, "_blank");
+            // const linkHref = listItemEl?.getAttribute('href');
+            // const onClickHandler = listItemEl?.getAttribute('onclick');
             debugger;
-            let newTab = window.open();
-            newTab.location.href = listItemEl.getAttribute('href')
+            if (linkHref) {
+                let newTab = window.open();
+
+                const interval = setInterval(() => {
+                    try {
+                        // Accessing location.href will throw a security error if not ready or cross-origin
+                        newTab.location.href = linkHref;
+                        clearInterval(interval);
+                    } catch (e) {
+                        // Wait until it's ready
+                    }
+                }, 150);
+
+                // newTab.location.href = linkHref;
+            } else if (clickHandler) {
+                // this.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true }));
+                // debugger;
+            }
             listItemEl?.classList.remove("is-clicked");
+
         }, 700);
         return;
     }
 
     connectedCallback() {
 
-        const linkTo = this?.getAttribute('href');
-
-        // const thisPossibleLink = this.item.querySelector('a');
-
-        if (linkTo) {
-            // this.removeAttribute('hidden');
-            this.item.setAttribute('href', linkTo);
-            this.item.setAttribute('role', 'link');
-        }
-
-        // const button = shadow?.querySelector(menuButtonClassName);
-        // const dropdown = shadow?.querySelector('.macintosh-menu__content');
-        // this.button = this.shadow?.querySelector(menuButtonClassName);
-        // this.content = this.shadow?.querySelector('.macintosh-menu__content');
 
         this.item.addEventListener('click', (e) => {
-            debugger;
             this.handleTimeoutClickEffect(e);
         })
-
-
-
-
     }
 
 }

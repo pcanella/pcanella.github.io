@@ -1,35 +1,39 @@
 ---
 import styles from "./style.module.scss";
 import TopBarClock from "../TopBarClock/TopBarClock.astro";
-import DropdownMenu from "../DropdownMenu/DropdownMenu.astro";
 import topMenuItems from "../../models/TopMenuItems";
 ---
 
 <nav class={styles.topBarContainer} class="topBar">
     <div class={styles.leftBar}>
-        <button class={styles.logoButton}
+        <!-- <button class={styles.logoButton}
             ><img
                 alt="Welcome to Patrick Canella's Retro site!"
                 class={styles.pcLogoImage}
                 src="src/assets/patretrologo.png"
             />
-        </button>
+        </button> -->
+
         <ul class={styles.navBar}>
-            <!-- <li>
-                <button target="_blank" href="https://patcanella.com/resume"
-                    >Resume</button
-                >
-            </li>
-            <li>
-                <a target="_blank" href="https://www.dev.to/pcanella/">Blog</a>
-            </li>
-            <li>
-                <a
-                    target="_blank"
-                    href="https://www.linkedin.com/in/patrickcanella/"
-                    class={styles.linkedInButton}>LinkedIn</a
-                >
-            </li> -->
+            <macintosh-menu>
+                <div class={styles.logoButtonContainer} slot="menuTitle">
+                    <div class={styles.logoButton}>
+                        <img
+                            alt="Welcome to Patrick Canella's Retro site!"
+                            class={styles.pcLogoImage}
+                            src="src/assets/patretrologo.png"
+                        />
+                    </div>
+                </div>
+                {
+                    topMenuItems.pc.map((item) => (
+                        <macintosh-menu-item slot="menuList" href={item.href} onClick={item?.onClick}>
+                            {item.title}
+                        </macintosh-menu-item>
+                    ))
+                }
+            </macintosh-menu>
+
             <macintosh-menu>
                 <span slot="menuTitle">About</span>
                 {
@@ -72,22 +76,7 @@ import topMenuItems from "../../models/TopMenuItems";
                 }
             </macintosh-menu>
 
-            <div
-                style=`
-               align-items: center;
-    background: linear-gradient(#000 50%, transparent 0);
-    background-clip: content-box;
-    background-size: 6.6666666667% 13.3333333333%;
-    display: flex
-;
-    flex: none;
-    height: 1.5rem;
-    margin: .1rem 0;
-    padding: .2rem .1rem;
-`
-            >
-                TEST
-            </div>
+       
         </ul>
     </div>
     <div class={styles.rightBar}>

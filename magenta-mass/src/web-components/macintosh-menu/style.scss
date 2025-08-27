@@ -2,6 +2,7 @@
 
 
 .macintosh-menu {
+  height: auto;
 
   &[open="true"] {
      background: black;
@@ -15,7 +16,7 @@
 
   &__button {
       @include noStyleButton;
-      background: white;
+      // background: white;
 
   }
 

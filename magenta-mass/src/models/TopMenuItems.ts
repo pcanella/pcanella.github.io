@@ -13,6 +13,9 @@ const topMenuItems = {
     about: [
         { title: 'Resume', href: 'https://www.patcanella.com/resume' },
         { title: 'Dev.to Blog', href: 'https://dev.to/pcanella' },
+    ],
+    pc: [
+        { title: 'Life Details', onClick: () => {alert('hi')} },
     ]
 }
 

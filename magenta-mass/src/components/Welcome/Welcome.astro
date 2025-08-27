@@ -1,16 +1,12 @@
 ---
-import background from "../../assets/background.svg";
 import TopBar from "./../TopBar/TopBar.astro";
-import RetroWindow from "./../RetroWindow/RetroWindow.astro";
 import { progress, isStartingUp } from "../../store.js";
-import IconButton from "../IconButton/IconButton.astro";
 import styles from "./style.module.scss";
-import topMenuItems from '../../models/TopMenuItems';
 ---
+
 <script type="module" src="/src/assets/scripts/register-components.ts"></script>
 
 <div class={styles.container} id="container">
-	<!-- <MenuSnippet/> -->
 	<div
 		id="startupContent"
 		aria-hidden={!isStartingUp.value}
@@ -36,13 +32,25 @@ import topMenuItems from '../../models/TopMenuItems';
 	<div id="mainContent" aria-hidden={isStartingUp.value}>
 		<TopBar />
 		<main class="mainWindow">
-			<IconButton/>
-			<RetroWindow
-				id="mainWindow"
-				x={0}
+			<macintosh-dialog-box>Hello</macintosh-dialog-box>
+			<macintosh-button id="hellobtn" data-type="primary">Hello Button</macintosh-button>
+			<div class={styles.iconSection}>
+				<macintosh-icon-button name="hard-drive"
+					>Patrick's Mac</macintosh-icon-button
+				>
+				<macintosh-icon-button name="folder"
+					>My Apps</macintosh-icon-button
+				>
+			</div>
+
+			<macintosh-window
+				id="welcomewindow"
+				data-header="Welcome!"
+				x={500}
 				y={100}
-				width={800}
-				header="Welcome!"
+				width={"550px"}
+				data-active="true"
+				aria-hidden="false"
 			>
 				<section class={styles.mainWindow}>
 					<h2 class={styles.mainHeader}>
@@ -60,29 +68,104 @@ import topMenuItems from '../../models/TopMenuItems';
 						/>
 					</div>
 				</section>
-			</RetroWindow>
+			</macintosh-window>
 
-			<RetroWindow
-				dragId="macintoshhdwindow"
-				hidden={true}
-				x={600}
-				y={100}
-				header="Patrick's Macintosh HD"
-				>Patrick's
-			</RetroWindow>
-		
+			<macintosh-window
+				id="myappswindow"
+				data-header="My Apps"
+				x={400}
+				y={200}
+				width={"400px"}
+				aria-hidden="true"
+				data-active="false"
+			>
+				<section class={styles.mainWindow}>
+					<h3 class={styles.mainHeader}>
+						Here are a list of My Apps currently in App Stores!
+					</h3>
+
+					<div class={styles.appsList}>
+
+						<macintosh-icon-button id="fishharmonyicon" src="/src/assets/fishharmonymacicon.png">Fish Harmony</macintosh-icon-button>
+					
+
+						<macintosh-icon-button id="klickytrackericon" src="/src/assets/klickytrackermacicon.png">KlickyTracker</macintosh-icon-button>
+						
+					</div>
+					<div class={styles.welcome}>
+						And welcome to my little web home! <img
+							class={styles.houseemoji}
+							src="/src/assets/houseemoji.jpg"
+						/>
+					</div>
+				</section>
+			</macintosh-window>
 		</main>
 	</div>
-
-	
 </div>
-
 
 <script>
 	import { isPatricksMacOpen, isStartingUp, progress } from "../../store.js";
 
+	const testwindow = document.getElementById("welcomewindow");
+	const myAppsWindow = document.getElementById("myappswindow");
+
+	testwindow?.addEventListener("macintosh:window-close-button", () => {
+		alert("AHHH!");
+	});
+
+	document.querySelector('#hellobtn')?.addEventListener('click', () => {
+		debugger;
+		var audio = new Audio('/src/assets/sounds/Bip.wav');
+		audio.play();
+	})
+
+	const selectionHelper = (currentId) => {
+
+		document.querySelectorAll('macintosh-window').forEach(el => {
+			if (el.id !== currentId) {
+				el.setAttribute('data-active', "false");
+			} else {
+				el.setAttribute('data-active', "true")
+			}
+		});
+	}
+	
+
+	document.querySelectorAll('macintosh-window').forEach(el => {
+		el.addEventListener("click", (e) => {
+		const currentId = e.currentTarget.id;
+		const selectedWindow = document.getElementById(currentId)
+
+		selectedWindow?.setAttribute('data-active', 'true');
+
+		selectionHelper(currentId);
+	});
+
+	})
+	const macWindow = document.getElementById("draggable-macintoshhdwindow");
+	const hdEl = document.querySelector("[name='hard-drive']");
+	const fhAppEl = document.querySelector('#fishharmonyicon');
+
+	fhAppEl?.addEventListener('dblclick', () => {
+		window.open('https://apps.apple.com/us/app/fish-harmony/id1309770017', "_blank");
+	})
+
+	hdEl?.addEventListener("dblclick", (event) => {
+		macWindow?.setAttribute("aria-hidden", "false");
+	});
+
+	const folderEl = document.querySelector("[name='folder']");
+
+	folderEl?.addEventListener("dblclick", (event) => {
+		folderEl?.blur();
+		myAppsWindow?.setAttribute("aria-hidden", "false");
+		const currentId = myAppsWindow.id;
+		selectionHelper(currentId);
+	});
+
 	function fakeLoad() {
-		let value = 0; 
+		let value = 0;
 
 		function step() {
 			if (value >= 100) return;
@@ -120,17 +203,21 @@ import topMenuItems from '../../models/TopMenuItems';
 
 	progress.subscribe(() => {
 		const progressBar = document.getElementById("startuploader");
-		progressBar?.setAttribute('value', String(progress.value));
+		progressBar?.setAttribute("value", String(progress.value));
 
-		if (progressBar?.getAttribute('value') === String(100)) {
+		if (progressBar?.getAttribute("value") === String(100)) {
 			isStartingUp.set(false);
 		}
-	})
+	});
 
 	isStartingUp.subscribe((profile) => {
 		if (isStartingUp.value === false) {
-			document.getElementById('mainContent')?.setAttribute('aria-hidden', 'false');
-			document.getElementById('startupContent')?.setAttribute('aria-hidden', 'true')
+			document
+				.getElementById("mainContent")
+				?.setAttribute("aria-hidden", "false");
+			document
+				.getElementById("startupContent")
+				?.setAttribute("aria-hidden", "true");
 		}
 	});
 </script>

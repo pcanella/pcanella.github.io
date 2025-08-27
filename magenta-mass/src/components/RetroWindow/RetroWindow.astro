@@ -4,60 +4,62 @@ const { header, x, y, width, height, dragId = 0, hidden = false } = Astro.props;
 const draggableId = `draggable-${dragId}`;
 const retroWindowHeaderId = `retroWindowHeader-${dragId}`;
 const resizeBoxId = `resizeBoxId-${dragId}`;
-
+const mainContentId = `mainContent-${dragId}`;
 ---
 
-<div
-    aria-hidden={hidden}
-    id={draggableId}
-    class={styles.retroWindow}
-    style="width: {width}; min-width: {width}"
-    data-x={x}
-    data-y={y}
->
-    <div id={retroWindowHeaderId} class={styles.header}>
-        <div class={styles.backgroundOfHeader}>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
-        </div>
-        <div class={styles.middleHeader}>{header}</div>
+<div class={styles.wrapper}>
+    <div
+        aria-hidden={hidden}
+        id={draggableId}
+        class={styles.retroWindow}
+        style="width: {width}; min-width: {width}"
+        data-x={x}
+        data-y={y}
+    >
+        <div id={retroWindowHeaderId} class={styles.header}>
+            <div class={styles.backgroundOfHeader}>
+                <div class={styles.decorLine}>
+                    <button class={styles.topButton}>
+                        <div class={styles.innerButton}></div>
+                    </button>
+                </div>
+            </div>
+            <div class={styles.middleHeader}>{header}</div>
 
-        <div class={styles.backgroundOfHeader}>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
-            <span class={styles.decorLine}></span>
+            <div class={styles.backgroundOfHeader}>
+                <div class={styles.decorLine}>
+                    <button class={`${styles.topButton} ${styles.rightButton}`}>
+                        <div class={styles.innerButton}></div>
+                    </button>
+                </div>
+            </div>
+            <div class={styles.rightHeaderSide}></div>
+              <span class={styles.firstBorder}></span>
+        <span class={styles.secondBorder}></span>
         </div>
-        <div class={styles.rightHeaderSide}></div>
+      
+
+        <div id={mainContentId} class={styles.mainContent}>
+            <div
+                class={styles.body}
+                id={resizeBoxId}
+                style="visibility: hidden;"
+            >
+                <slot />
+            </div>
+        </div>
     </div>
-    <span class={styles.firstBorder}></span>
-    <span class={styles.secondBorder}></span>
-
-    <div class={styles.mainContent}>
-        <div class={styles.body} id={resizeBoxId} style="visibility: hidden;">
-            <slot />
-        </div>
-    </div>
-
-    <!-- <div class={styles.footer}>
-        <div id={resizeBoxId}>
-            <img src="/src/assets/resize-button.png" width="20"/>
-        </div>
-    </div> -->
 </div>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"
-></script> -->
-
 <script
-    define:vars={{ draggableId, retroWindowHeaderId, resizeBoxId }}
+    define:vars={{
+        draggableId,
+        mainContentId,
+        resizeBoxId,
+        retroWindowHeaderId,
+    }}
     type="module"
 >
-
     setTimeout(
         () =>
             (document.querySelector(`#${resizeBoxId}`).style =
@@ -66,7 +68,60 @@ const resizeBoxId = `resizeBoxId-${dragId}`;
     );
 
     // target elements with the "draggable" class
-    const position = { x: 0, y: 0 }
+    const position = { x: 0, y: 0 };
+
+    // const retroWindowHeader = document.getElementById(mainContentId);
+    const resizeBox = document.getElementById(resizeBoxId);
+
+    debugger;
+    const resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+            // entry.target is the element that was resized
+            // entry.contentRect contains the new dimensions (width, height, etc.)
+            console.log(`Element ${entry.target.id} was resized to:`);
+            console.log(`Width: ${entry.contentRect.width}px`);
+            console.log(`Height: ${entry.contentRect.height}px`);
+            debugger;
+            const retroWindowHeader =
+                document.getElementById(retroWindowHeaderId);
+
+            // if (entry.contentRect.width > retroWindowHeader.offsetWidth) {
+            retroWindowHeader?.setAttribute(
+                "style",
+                `width: ${entry.contentRect.width + 19.5}px`,
+            );
+            // }
+            // You can perform actions here based on the new size
+        }
+    });
+
+    // Start observing the element
+    resizeObserver.observe(resizeBox);
+
+    // To stop observing later:
+    // resizeObserver.unobserve(myElement);
+    // To disconnect all observations:
+    // resizeObserver.disconnect();
+
+    debugger;
+
+    document.getElementById(retroWindowHeaderId).addEventListener('mousedown', (e) => {
+        const thisWindow = document.getElementById(draggableId);
+        const dottedPastWindow = document.createElement('div');
+        dottedPastWindow.classList.add('ghost')
+        document.querySelector('main').appendChild(dottedPastWindow);
+        dottedPastWindow.style.width = `${thisWindow.clientWidth}px`;
+        dottedPastWindow.style.height = `${thisWindow.clientHeight}px`;
+        dottedPastWindow.style.position = 'absolute';
+        dottedPastWindow.style.zIndex = 1;
+        debugger;
+        dottedPastWindow.style.transform = thisWindow.style.transform;
+        dottedPastWindow.style.border = '2px dotted rgb(166,166,166)';
+    })
+
+     document.getElementById(retroWindowHeaderId).addEventListener('mouseup', (e) => {
+        document.querySelectorAll('.ghost').forEach(item => item.remove());
+     });
 
     interact(`#${draggableId}`).draggable({
         // enable inertial throwing

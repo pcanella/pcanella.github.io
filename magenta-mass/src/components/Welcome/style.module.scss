@@ -1,7 +1,8 @@
 main {
     height: 100%;
-    display: flex;
-    justify-content: center;
+    // display: flex;
+    width: 100%;
+    // justify-content: center;
 }
 
 .container {
@@ -49,6 +50,21 @@ div[aria-hidden="true"] {
     div {
         margin-top: 0.3rem;
     }
+
+
+}
+
+
+.iconSection {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    ;
+    top: 50px;
+    right: 20px;
+    gap: 15px;
 }
 
 .welcome {
@@ -57,7 +73,8 @@ div[aria-hidden="true"] {
 }
 
 .selfportrait {
-    border: 3px solid black;
+    // border: 3px solid black;
+    border-radius:2px;
 }
 
 .houseemoji {
@@ -119,5 +136,27 @@ div[aria-hidden="true"] {
             align-items: center;
             padding-bottom: 3rem;
         }
+    }
+}
+
+.appsList {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+}
+
+.appsListApp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    row-gap: 8px;
+    font-weight: normal;
+
+    span {
+        font-family: "Geneva", sans-serif;
     }
 }

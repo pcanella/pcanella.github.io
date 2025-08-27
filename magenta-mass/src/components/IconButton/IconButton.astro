@@ -1,13 +1,13 @@
 ---
 import styles from "./style.module.scss";
-const { onOpen } = Astro.props;
+const { type = 'hardDriveBox', title = "Patrick's Mac" } = Astro.props;
 ---
 <button id="iconBtn" data-single-click="false" class={styles.iconButton}>
     <div class={styles.iconButtonContainer}>
-        <div id="hdBox" class={styles.hardDriveBox}>
+        <div id="hdBox" class={styles[type]}>
             <div class={styles.hardDriveNub}>-</div>
         </div>
-        <div class={styles.innerText}>Patrick's Mac</div>
+        <div class={styles.innerText}>{title}</div>
 
     </div>
 

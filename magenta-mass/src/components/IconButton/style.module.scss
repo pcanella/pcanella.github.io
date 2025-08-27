@@ -1,7 +1,7 @@
 .iconButton {
-    position: absolute;
-    top: 50px;
-    right: 20px;
+    // position: absolute;
+    // top: 50px;
+    // right: 20px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -9,7 +9,68 @@
     background: transparent;
     border: none;
 
-    
+    .folder {
+        width: 50px;
+        height: 30px;
+        background-image:
+            linear-gradient(45deg, rgb(223, 115, 111) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgb(223, 115, 111) 75%);
+        background-color: rgb(255, 210, 208);
+        /* Lighter base color */
+        background-size: 2px 2px;
+        background-position: 0 0, 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        margin: 0 auto;
+        margin-bottom: 3px;
+
+        .hardDriveNub {
+            display: none;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 42px;
+            left: 17px;
+            width: 20px;
+            height: 7px;
+            background-color: black;
+            // border-top: 1px solid black;
+            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+
+            // border-left: 2px solid black;
+            // border-right: 1px solid black;
+            clip-path: polygon(10% 0%,
+                    /* top-left */
+                    90% 0%,
+                    /* top-right */
+                    100% 100%,
+                    /* bottom-right */
+                    0% 100%
+                    /* bottom-left */
+                );
+            /* Your color here */
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            width: 18px;
+            height: 6px;
+            top: 43px;
+            left: 18px;
+            /* simulates border thickness */
+            background-color: rgb(228, 173, 171);
+            /* your main color */
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+            z-index: 1;
+        }
+
+    }
+
+
     .hardDriveBox {
         width: 50px;
         height: 10px;
@@ -29,20 +90,11 @@
         }
     }
 
-    // &[data-single-click="false"] {
-    //     .hardDriveBox {
-    //         // background: gray;
-    //         color: white;
-    //         .hardDriveNub {
-    //             color: rgb(64, 63, 63);
-    //         }
-    //     }
-    // }
-
-    &[data-single-click="true"]{
+    &[data-single-click="true"] {
         .hardDriveBox {
             background: gray;
             color: white;
+
             .hardDriveNub {
                 color: rgb(64, 63, 63);
             }
