@@ -6,4 +6,4 @@ import '../../web-components/macintosh-window/index';
 import '../../web-components/macintosh-button/index';
 import '../../web-components/macintosh-dialog-box/index';
 
-import '../../assets/scripts/interact';
+import './interact';
