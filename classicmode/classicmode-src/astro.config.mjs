@@ -6,7 +6,7 @@ import simpleStackQuery from 'simple-stack-query';
 // https://astro.build/config
 export default defineConfig({
   integrations: [simpleStackQuery()],
-  site: 'https://pcanella.github.io',
+site: 'https://www.patcanella.com',
   base: '/classicmode',          // important for asset & link URLs
   trailingSlash: 'always',       // optional but safe on GitHub Pages
   outDir: '../classicmode',    // build *into the repo root/classicmode*
