@@ -7,7 +7,7 @@ import simpleStackQuery from 'simple-stack-query';
 export default defineConfig({
   integrations: [simpleStackQuery()],
   site: 'https://pcanella.github.io',
-  base: '/classic',          // important for asset & link URLs
+  base: '/classicmode',          // important for asset & link URLs
   trailingSlash: 'always',       // optional but safe on GitHub Pages
   outDir: '../classicmode',    // build *into the repo root/classicmode*
   build: {
