@@ -15,6 +15,7 @@ const topMenuItems = {
         { title: 'Dev.to Blog', href: 'https://dev.to/pcanella' },
     ],
     pc: [
+        { title: 'About this Site...', onClick: () => {alert('hi')} },
         { title: 'Life Details', onClick: () => {alert('hi')} },
     ]
 }
