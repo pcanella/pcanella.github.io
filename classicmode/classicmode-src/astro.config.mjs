@@ -11,6 +11,6 @@ export default defineConfig({
   trailingSlash: 'always',       // optional but safe on GitHub Pages
   outDir: '../classicmode',    // build *into the repo root/classicmode*
   build: {
-    emptyOutDir: true            // only empties the outDir, not your repo
+    assets: 'classic-assets'     // 👈 NOT '_astro' — no leading underscore
   }
 });
