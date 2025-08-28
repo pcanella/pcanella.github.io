@@ -9,8 +9,8 @@ export default defineConfig({
   site: 'https://pcanella.github.io',
   base: '/classicmode',          // important for asset & link URLs
   trailingSlash: 'always',       // optional but safe on GitHub Pages
+  outDir: '../classicmode',    // build *into the repo root/classicmode*
   build: {
-    outDir: '../classicmode',    // build *into the repo root/classicmode*
     emptyOutDir: true            // only empties the outDir, not your repo
   }
 });
