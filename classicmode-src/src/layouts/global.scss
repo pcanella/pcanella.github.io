@@ -90,28 +90,28 @@ body {
 }
 
 ::-webkit-scrollbar-button:vertical:start {
-    background-image: url("classic/assets/arrow-up-2.png");
+    background-image: url("/classic/assets/arrow-up-2.png");
     background-size: 20px 20px;
     background-repeat: no-repeat;
     height: 20px;
 }
 
 ::-webkit-scrollbar-button:vertical:start:active {
-    background-image: url("classic/assets/arrow-up-2.png");
+    background-image: url("/classic/assets/arrow-up-2.png");
     background-repeat: no-repeat;
     height: 20px;
     background-size: 20px 20px;
 }
 
 ::-webkit-scrollbar-button:vertical:end {
-    background-image: url("classic/assets/arrow-down-2.png");
+    background-image: url("/classic/assets/arrow-down-2.png");
     height: 20px;
     background-size: 20px 20px;
     width: 25px;
 }
 
 ::-webkit-scrollbar-button:vertical:end:active {
-    background-image: url("classic/assets/arrow-down-2.png");
+    background-image: url("/classic/assets/arrow-down-2.png");
     background-repeat: no-repeat;
     height: 20px;
     background-size: 20px 20px;
@@ -119,14 +119,14 @@ body {
 }
 
 ::-webkit-scrollbar-button:horizontal:start {
-    background-image: url("classic/assets/arrow-left-2.png");
+    background-image: url("/classic/assets/arrow-left-2.png");
     // background-repeat: no-repeat;
     height: 20px;
     width: 25px;
 }
 
 ::-webkit-scrollbar-button:horizontal:start:active {
-    background-image: url("classic/assets/arrow-left-2.png");
+    background-image: url("/classic/assets/arrow-left-2.png");
 
     background-repeat: no-repeat;
     height: 20px;
@@ -134,13 +134,13 @@ body {
 }
 
 ::-webkit-scrollbar-button:horizontal:end {
-    background-image: url("classic/assets/arrow-right-2.png");
+    background-image: url("/classic/assets/arrow-right-2.png");
     height: 20px;
     width: 25px;
 }
 
 ::-webkit-scrollbar-button:horizontal:end:active {
-    background-image: url("classic/assets/arrow-right-2.png");
+    background-image: url("/classic/assets/arrow-right-2.png");
     background-repeat: no-repeat;
     height: 20px;
     width: 25px;
