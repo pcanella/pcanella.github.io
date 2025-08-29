@@ -1,0 +1,180 @@
+// @font-face {
+//   font-family: "EB Garamond", serif;
+//   font-optical-sizing: auto;
+//   font-weight: 400;
+//   font-style: normal;
+// }
+
+@font-face {
+    font-family: "Chicago";
+    src: url("src/assets/fonts/Chicago.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Geneva";
+    src: url("src/assets/fonts/bitgeneva.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Chicago", sans-serif;
+    background: rgb(82, 151, 152) !important;
+    overflow-y: hidden;
+    border: none;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+}
+
+
+::-webkit-resizer {
+
+    width: 2.6rem;
+    height: 0.4rem;
+    position: absolute;
+    bottom: 0;
+    right: -50px;
+    background-image: url("/src/assets/resize-button.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid black;
+    // border-right: 7px solid black;
+    // display: none;
+    z-index: 999;
+
+}
+
+//     width: 0.4rem;
+//     height: 0.4rem;
+//     position: absolute;
+//     bottom: 0;
+//     right: 0;
+//     background-image: url("/src/assets/resize-icon.png");
+//     background-size: 20px 20px;
+//     background-repeat: no-repeat;
+//     background-position: center;
+//     border: 1px solid black;
+//     // display: none;
+//     z-index: 999;
+// }
+
+
+::-webkit-scrollbar-thumb {
+    background: rgb(166, 166, 201);
+    // border: 2px solid #000;
+    border-right: none;
+    box-sizing: content-box;
+    width: 20px;
+    border-top: 1px solid black;
+    border-bottom: 2px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+::-webkit-scrollbar-button {
+    // border: 1px solid black;
+    // border-bottom: 2px solid black;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment,
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement {
+    display: block
+}
+
+::-webkit-scrollbar-button:vertical:start {
+    background-image: url("/src/assets/arrow-up-2.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    height: 20px;
+}
+
+::-webkit-scrollbar-button:vertical:start:active {
+    background-image: url("/src/assets/arrow-up-2.png");
+    background-repeat: no-repeat;
+    height: 20px;
+    background-size: 20px 20px;
+}
+
+::-webkit-scrollbar-button:vertical:end {
+    background-image: url("/src/assets/arrow-down-2.png");
+    height: 20px;
+    background-size: 20px 20px;
+    width: 25px;
+}
+
+::-webkit-scrollbar-button:vertical:end:active {
+    background-image: url("/src/assets/arrow-down-2.png");
+    background-repeat: no-repeat;
+    height: 20px;
+    background-size: 20px 20px;
+    width: 25px;
+}
+
+::-webkit-scrollbar-button:horizontal:start {
+    background-image: url("/src/assets/arrow-left-2.png");
+    // background-repeat: no-repeat;
+    height: 20px;
+    width: 25px;
+}
+
+::-webkit-scrollbar-button:horizontal:start:active {
+    background-image: url("/src/assets/arrow-left-2.png");
+
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 25px;
+}
+
+::-webkit-scrollbar-button:horizontal:end {
+    background-image: url("/src/assets/arrow-right-2.png");
+    height: 20px;
+    width: 25px;
+}
+
+::-webkit-scrollbar-button:horizontal:end:active {
+    background-image: url("/src/assets/arrow-right-2.png");
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 25px;
+}
+
+::-webkit-scrollbar-track {
+    background: radial-gradient(circle, #b0b0b0 20%, transparent 20%),
+        radial-gradient(circle, #b0b0b0 20%, transparent 20%);
+    background-size: 6px 6px;
+    /* Smaller dots */
+    background-position: 0 0, 3px 9px;
+    /* Staggered effect */
+    background-color: #d0d0d0;
+    /* Track background */
+}
+
+
+.mainContent,
+#mainContent {
+    height: 100%;
+
+    .body {
+        height: 100%;
+        overflow: scroll;
+        resize: both;
+        background: white;
+
+        border-right: 3.5px solid black;
+        border-bottom: 3.5px solid black;
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        max-width: 500px;
+        max-height: 400px;
+        min-width: 300px;
+        min-height: 200px;
+    }
+}

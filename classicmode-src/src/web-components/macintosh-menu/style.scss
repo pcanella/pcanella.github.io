@@ -1,0 +1,74 @@
+@use '../../styles/mixins' as *;
+
+
+.macintosh-menu {
+  height: auto;
+
+  &[open="true"] {
+     background: black;
+    color:white;
+  }
+
+  &[open="false"] {
+    background: white;
+    color: black;
+  }
+
+  &__button {
+      @include noStyleButton;
+      // background: white;
+
+  }
+
+  &__content {
+    &[aria-expanded="false"] {
+      display: none;
+    }
+
+    &[aria-expanded="true"] {
+      padding-left: 0;
+      display: block;
+      background: white;
+      height: auto;
+      min-width: 150px;
+      border: 1px solid black;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      z-index: 1000;
+      position: absolute;
+
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      // li {
+      //   padding-left: 1rem;
+      //   list-style-type: none;
+      //   ;
+
+      //   a,
+      //   a:visited {
+      //     color: black;
+      //     text-decoration: none;
+      //     font-size: 14px;
+      //   }
+
+      //   &:hover {
+      //     color: white;
+      //   }
+
+      //   &:last-child {
+      //     padding-bottom: 5px;
+      //   }
+      // }
+    }
+  }
+}
+
+.is-clicked {
+  background: black;
+  color:white;
+}

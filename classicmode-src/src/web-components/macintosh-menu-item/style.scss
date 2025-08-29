@@ -1,0 +1,51 @@
+.macintosh-menu-item {
+
+    padding-top: 5px;
+    font-size: 14px;
+
+    &[href] {
+        cursor: pointer;
+    }
+
+    padding-left: 1rem;
+    list-style-type: none;
+
+    a,
+    a:visited {
+        color: black;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    &:hover {
+        color: white;
+        background: black;
+    }
+
+    &:last-child {
+        padding-bottom: 5px;
+    }
+
+    //   }
+}
+
+.is-clicked {
+    &:hover {
+        background: transparent black;
+        overflow: hidden;
+    }
+
+    animation: 0.07s 5 alternate slide-in;
+}
+
+@keyframes slide-in {
+    from {
+        background: black;
+        color: white;
+    }
+
+    to {
+        background: white;
+        color: black;
+    }
+}

@@ -1,0 +1,187 @@
+@mixin noStyleButton {
+    background: transparent;
+    font-family: "Chicago", sans-serif;
+    font-size: 1rem;
+    padding: 0;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+
+    &:active {
+        background: black;
+        color: white;
+    }
+}
+
+// .linkedInButton {
+//     color: green;
+
+//     background: linear-gradient(to right, 
+//     #00497d, /* Darker LinkedIn Blue */
+//     #0077B5, /* Official LinkedIn Blue */
+//     #00497d, /* Darker LinkedIn Blue */
+//     #000000  /* Black */
+//   );
+//   background-size: 300% 100%;
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: transparent;
+//   transition: background-position 0.5s ease-in-out;
+
+//   &:hover {
+//     animation: shimmer 2s infinite ease-in-out;
+//   }
+
+//   @keyframes linkedinShimmer {
+//     0% { background-position: 0% 50%; }
+//     50% { background-position: 100% 50%; }
+//     100% { background-position: 0% 50%; }
+//   }
+
+// }
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.topBarContainer {
+    background: white;
+    height: 1.6rem;
+    border-top-left-radius: 1%;
+    border-top-right-radius: 1%;
+    border: 1px solid transparent;
+    font-family: "Chicago", sans-serif;
+    font-size: 18px;
+    border-bottom: 3.5px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    .leftBar {
+        display: flex;
+        height: inherit;
+    }
+
+    h2 {
+        margin: 0;
+        padding-left: 1rem;
+        // font-family: sans-serif;
+        font-size: 1.3rem;
+        background: linear-gradient(to right,
+                #d60000,
+                /* Brightened Red */
+                #e07b41,
+                /* Brightened Orange */
+                #bfa100,
+                /* Brightened Yellow */
+                #009a00,
+                /* Brightened Green */
+                #006dcc,
+                /* Brightened Blue */
+                #5a00b0
+                /* Brightened Purple */
+            );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        background-size: 300% 100%;
+        /* Makes the gradient larger for movement */
+        animation: shimmer 10s infinite ease-in-out;
+    }
+
+}
+
+.navBar {
+    display: flex;
+    margin: 0;
+    padding-left: 0;
+
+    li {
+        list-style-type: none;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        cursor: pointer;
+
+        button {
+            @include noStyleButton();
+            text-decoration: none;
+            color: black;
+        }
+
+        a {
+            &.instagramButton {
+                @include noStyleButton();
+                color: #5a00b0;
+            }
+
+            &.linkedInButton {
+                @include noStyleButton();
+                color: #006dcc;
+            }
+        }
+
+        &:hover {
+            // background: black;
+            // color: white;
+        }
+    }
+}
+
+.githubLogoButton {
+    @include noStyleButton();
+    margin-right: 0.3rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.3rem;
+
+    &:hover {
+        background: transparent;
+        color: black;
+    }
+}
+
+.githubLogoImage {
+    width: 33px;
+}
+
+.logoButtonContainer {
+    height: 25px;
+    width: 29px;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.logoButton {
+    @include noStyleButton();
+    background: transparent;
+    height: 29px;
+    padding-left: 0;
+    margin-left: 10px;
+
+    .pcLogoImage {
+        margin-top: 0px;
+        background: transparent;
+        width: 29px;
+        height: 25px;
+        filter: brightness(1.2);
+    }
+}
+
+
+.rightBar {
+    align-items: center;
+    display: flex;
+}

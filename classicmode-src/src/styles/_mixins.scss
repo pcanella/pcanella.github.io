@@ -1,0 +1,27 @@
+@mixin noStyleButton {
+    background: transparent;
+    font-family: "Chicago", sans-serif;
+    font-size: 1rem;
+    padding: 0 0.6rem;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+
+    &:active,
+    &:hover {
+        background: black;
+        color: white;
+    }
+}
+
+@mixin BeforeSmallBox($width: 9px, $height: 8px) {
+    content: " ";
+    width: $width;
+    height: $height;
+    background: rgb(156, 156, 156);
+    display: block;
+    border-bottom: 2px solid rgb(75, 75, 122);
+    border-right: 2px solid rgb(75, 75, 122);
+    border-top: 1px solid rgb(197, 197, 240);
+    border-left: 1px solid rgb(197, 197, 240);
+}
