@@ -4,7 +4,7 @@ import { progress, isStartingUp } from "../../store.js";
 import styles from "./style.module.scss";
 ---
 
-<script type="module" src="classic/assets/scripts/register-components.ts"></script>
+<script type="module" src={`${import.meta.env.BASE_URL}/assets/scripts/register-components.ts`}></script>
 
 <div class={styles.container} id="container">
 	<div
@@ -42,7 +42,7 @@ import styles from "./style.module.scss";
 				>
 
 				<div slot="icon">
-					<img src="/classic/assets/dialogimage.png" width="55"/>
+					<img src={`${import.meta.env.BASE_URL}/assets/dialogimage.png`} width="55"/>
 
 				</div>
 				<div class={styles.dialogBoxFooter} slot="callToAction">
@@ -80,7 +80,7 @@ import styles from "./style.module.scss";
 					</h2>
 					<img
 						class={styles.selfportrait}
-						src="/classic/assets/self.png"
+						src={`${import.meta.env.BASE_URL}/assets/self.png`}
 						width="200"
 					/>
 					<div class={styles.welcome}>
