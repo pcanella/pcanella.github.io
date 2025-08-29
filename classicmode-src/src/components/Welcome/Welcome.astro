@@ -4,7 +4,7 @@ import { progress, isStartingUp } from "../../store.js";
 import styles from "./style.module.scss";
 ---
 
-<script type="module" src="/src/assets/scripts/register-components.ts"></script>
+<script type="module" src="classic/assets/scripts/register-components.ts"></script>
 
 <div class={styles.container} id="container">
 	<div
@@ -42,7 +42,7 @@ import styles from "./style.module.scss";
 				>
 
 				<div slot="icon">
-					<img src="/src/assets/dialogimage.png" width="55"/>
+					<img src="/classic/assets/dialogimage.png" width="55"/>
 
 				</div>
 				<div class={styles.dialogBoxFooter} slot="callToAction">
@@ -80,13 +80,13 @@ import styles from "./style.module.scss";
 					</h2>
 					<img
 						class={styles.selfportrait}
-						src="/src/assets/self.png"
+						src="/classic/assets/self.png"
 						width="200"
 					/>
 					<div class={styles.welcome}>
 						And welcome to my little web home! <img
 							class={styles.houseemoji}
-							src="/src/assets/houseemoji.jpg"
+							src="/classic/assets/houseemoji.jpg"
 						/>
 					</div>
 				</section>
@@ -96,7 +96,7 @@ import styles from "./style.module.scss";
 				id="myappswindow"
 				data-header="My Apps"
 				x={400}
-				y={200}
+				y={-50}
 				width={"400px"}
 				aria-hidden="true"
 				data-active="false"
@@ -109,20 +109,20 @@ import styles from "./style.module.scss";
 					<div class={styles.appsList}>
 						<macintosh-icon-button
 							id="fishharmonyicon"
-							src="/src/assets/fishharmonymacicon.png"
+							src="/classic/assets/fishharmonymacicon.png"
 							>Fish Harmony</macintosh-icon-button
 						>
 
 						<macintosh-icon-button
 							id="klickytrackericon"
-							src="/src/assets/klickytrackermacicon.png"
+							src="/classic/assets/klickytrackermacicon.png"
 							>KlickyTracker</macintosh-icon-button
 						>
 					</div>
 					<div class={styles.welcome}>
 						And welcome to my little web home! <img
 							class={styles.houseemoji}
-							src="/src/assets/houseemoji.jpg"
+							src="/classic/assets/houseemoji.jpg"
 						/>
 					</div>
 				</section>
@@ -183,7 +183,7 @@ import styles from "./style.module.scss";
 
 	klickyTrackerIconEl?.addEventListener("dblclick", () => {
 		dialogBox?.setAttribute("aria-hidden", "false");
-		var audio = new Audio("/src/assets/sounds/Bip.wav");
+		var audio = new Audio("/classic/assets/sounds/Bip.wav");
 		audio.play();
 	});
 
