@@ -1,29 +1,23 @@
-# _config.yml (at the root of the branch GitHub Pages publishes)
-
-# Site settings
-url: "https://www.patcanella.com"   # your custom domain
-baseurl: ""                         # user/ORG site → leave empty
+url: "https://www.patcanella.com"
+baseurl: ""
 permalink: pretty
 
-# Make sure the Astro build folder is included in the Jekyll build
-include:
-  - classicmode
-
-# Keep dev-only stuff out of the published site
+# Make sure Jekyll does NOT touch your Astro SOURCE
 exclude:
-  - node_modules
-  - vendor
-  - Gemfile
-  - Gemfile.lock
+  - classicmode-src/
+  - classicmode-src/**    # belt & suspenders
+  - node_modules/
+  - .astro/
+  - dist/
+  - "**/*.astro"          # ignore any stray .astro files anywhere
   - package.json
   - package-lock.json
   - README.md
   - .gitignore
-  - .astro
-  - dist
-  - classicmode-src   # if you use a split source/output setup
 
-# (optional) GitHub Pages–safe plugins
+# DO NOT include: classicmode
+# Jekyll will copy the built /classicmode folder as static files by default.
+
 plugins:
   - jekyll-sitemap
   - jekyll-feed
