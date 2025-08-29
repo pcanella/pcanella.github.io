@@ -4,8 +4,9 @@ import { progress, isStartingUp } from "../../store.js";
 import styles from "./style.module.scss";
 ---
 
-<script type="module" src={`${import.meta.env.BASE_URL}/assets/scripts/register-components.js`}></script>
-
+<script>
+  import '../../scripts/register-components.ts';
+</script>
 <div class={styles.container} id="container">
 	<div
 		id="startupContent"
