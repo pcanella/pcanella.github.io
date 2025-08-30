@@ -84,7 +84,7 @@ import topMenuItems from "../../models/TopMenuItems";
         <button class={styles.githubLogoButton}>
             <img
                 class={styles.githubLogoImage}
-                src="classic/assets/github-logo.gif"
+                src="/classic/assets/github-logo.gif"
             />
         </button>
     </div>
@@ -107,15 +107,4 @@ import topMenuItems from "../../models/TopMenuItems";
             event.currentTarget.setAttribute("open", isOpen ? "false" : "true");
         });
     });
-
-    // define a handler
-    function keyUp(e) {
-        // this would test for whichever key is 40 (down arrow) and the ctrl key at the same time
-        if (e.ctrlKey && e.code === "ArrowDown") {
-            // call your function to do the thing
-            pauseSound();
-        }
-    }
-    // register the handler
-    document.addEventListener("keyup", keyUp, false);
 </script>
