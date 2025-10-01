@@ -596,21 +596,13 @@
         .highlights li {
             margin-bottom: 3px;
         }
-
-        .highlights li:before {
-            content: "- ";
-        }
-
         .item ul.list {
             margin-left: 30px;
         }
 
         .item li {
             margin-bottom: 3px;
-        }
-
-        .item li:before {
-            content: "- ";
+            list-style-type: disc;
         }
 
         #publications .date {
