@@ -540,7 +540,7 @@
             display: -moz-box;
             display: -ms-flexbox;
             display: -webkit-flex;
-            display: flex;
+            display: block;
             -webkit-flex-flow: row wrap;
             flex-flow: row wrap;
             -webkit-justify-content: flex-start;
@@ -825,7 +825,7 @@
             }
 
             section:not(.section) {
-                width: 34.5em;
+                width: 100%;
                 padding: 0 1em 1em 0;
                 margin-top: 0;
                 border: none;
