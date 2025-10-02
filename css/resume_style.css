@@ -602,6 +602,10 @@
                 margin-left: 1rem;
         }
 
+        .skills.ul {
+            margin-left: 0;
+        }
+
         .highlights li {
             margin-bottom: 3px;
         }
