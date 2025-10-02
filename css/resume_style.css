@@ -675,7 +675,7 @@
         }
 
         .section h2 {
-            margin-bottom: 2rem;
+            margin-bottom: 1.3rem;
         }
 
         /* Social Media Brand Colors */
@@ -836,6 +836,7 @@
 
             section p {
                 margin: 0;
+                padding-bottom: 0.5rem;
             }
 
             section#basics {
