@@ -336,7 +336,7 @@
 
         strong {
             font-weight: 700;
-            font-size: 1.1em;
+            /* font-size: 1.1em; */
         }
 
         ul {
@@ -474,6 +474,7 @@
             color: #757575;
             padding: 1em 1rem 0;
             margin-bottom: 0.1275em;
+            padding-left: 0;
         }
 
         .date {
@@ -675,7 +676,7 @@
         }
 
         .section h2 {
-            margin-bottom: 1.3rem;
+            margin-bottom: 1rem;
         }
 
         /* Social Media Brand Colors */
