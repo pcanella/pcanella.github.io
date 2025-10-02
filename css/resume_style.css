@@ -408,6 +408,7 @@
         #header {
             padding: 0 1em;
             margin-bottom: 1em;
+            padding-left: 0;
         }
 
         #resume>header div {
