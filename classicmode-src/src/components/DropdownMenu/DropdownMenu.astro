@@ -47,7 +47,6 @@ const ddId = `dropdown-${dropdownId}`;
     import { scope } from "simple:scope";
 
     document.addEventListener("click", (e) => {
-        debugger;
         const ddIdMenuContentEl = document?.getElementById(
             scope("menu-content"),
         );
@@ -64,7 +63,6 @@ const ddId = `dropdown-${dropdownId}`;
             return;
         }
 
-        debugger;
         if (e.target.id === scope("dropdown-menu-button")) {
             const ddIdMenuContentEl = document?.getElementById(
                 scope("menu-content"),
@@ -81,33 +79,7 @@ const ddId = `dropdown-${dropdownId}`;
             return;
         } else {
             ddIdMenuContentEl?.setAttribute("aria-expanded", "false");
-            // const currentAriaStatus = document
-            //     .getElementById(scope("menu-content"))
-            //     ?.getAttribute("aria-expanded");
-            // const ddIdMenuContentEl = document?.getElementById(
-            //     scope("menu-content"),
-            // );
-            // ddIdMenuContentEl?.setAttribute(
-            //     "aria-expanded",
-            //     currentAriaStatus === "true" ? "false" : "true",
-            // );
         }
     });
-
-    const mIdEl = document.querySelector(`[data-menu-id=${scope("menu-id")}]`);
-
-    // ddId?.querySelector(`button`)?.addEventListener("click", (e) => {
-    //     const ddIdMenuContentEl = document?.getElementById(
-    //         scope("menu-content"),
-    //     );
-    //     const currentAriaStatus = document
-    //         .getElementById(scope("menu-content"))
-    //         ?.getAttribute("aria-expanded");
-
-    //     ddIdMenuContentEl?.setAttribute(
-    //         "aria-expanded",
-    //         currentAriaStatus === "true" ? "false" : "true",
-    //     );
-    // });
 </script>
 

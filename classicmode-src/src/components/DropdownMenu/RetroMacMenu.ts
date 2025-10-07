@@ -56,14 +56,13 @@ export default class MacDropdown extends HTMLElement {
     }
 
     handleClick() {
-        debugger;
+        
     }
 
     // Callback when the element is added to the DOM
     connectedCallback() {
         const listItems = this.getAttribute('data-list');
         this.listItems = listItems;
-
         debugger;
         this.shadowRoot?.getElementById('retro-mac-menu')?.addEventListener('click', () => {
             const dropDownMenuEl = this.shadowRoot?.querySelector('.dropdown-menu-content');

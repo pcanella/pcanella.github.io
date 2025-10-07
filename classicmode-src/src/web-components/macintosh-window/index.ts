@@ -191,7 +191,6 @@ export class MacintoshWindow extends HTMLElement {
 
         headerEl.addEventListener('mousedown', onMouseDown);
         headerEl.addEventListener('mouseup', onMouseUp);
-        debugger;
         this.leftMenuButtonEl?.addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('macintosh:window-close-button', {
                 bubbles: true, // allows the event to bubble up through the DOM

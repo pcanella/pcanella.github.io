@@ -27,10 +27,6 @@ class MacintoshMenuItem extends HTMLElement {
         const listItemEl = this.shadowRoot?.querySelector('li');
         listItemEl?.classList.add("is-clicked");
         setTimeout(() => {
-            // window.open(e.target.href, "_blank");
-            // const linkHref = listItemEl?.getAttribute('href');
-            // const onClickHandler = listItemEl?.getAttribute('onclick');
-            debugger;
             if (linkHref) {
                 let newTab = window.open();
 

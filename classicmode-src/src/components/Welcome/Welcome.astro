@@ -54,9 +54,6 @@ import styles from "./style.module.scss";
 					>
 				</div>
 			</macintosh-dialog-box>
-			<!-- <macintosh-button id="hellobtn" data-type="primary"
-				>Hello Button</macintosh-button
-			> -->
 			<div class={styles.iconSection}>
 				<macintosh-icon-button name="hard-drive"
 					>Patrick's Mac</macintosh-icon-button
@@ -134,7 +131,8 @@ import styles from "./style.module.scss";
 	const dialogBox = document.getElementById("openappdialog");
 	const klickyTrackerIconEl = document.getElementById("klickytrackericon");
 	testwindow?.addEventListener("macintosh:window-close-button", () => {
-		alert("AHHH!");
+		var audio = new Audio("/classic/assets/sounds/Bip.wav");
+		audio.play();
 	});
 
 	document.querySelector("#cancelbtn")?.addEventListener("click", () => {

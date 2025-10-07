@@ -73,7 +73,6 @@ const mainContentId = `mainContent-${dragId}`;
     // const retroWindowHeader = document.getElementById(mainContentId);
     const resizeBox = document.getElementById(resizeBoxId);
 
-    debugger;
     const resizeObserver = new ResizeObserver((entries) => {
         for (let entry of entries) {
             // entry.target is the element that was resized
@@ -81,7 +80,6 @@ const mainContentId = `mainContent-${dragId}`;
             console.log(`Element ${entry.target.id} was resized to:`);
             console.log(`Width: ${entry.contentRect.width}px`);
             console.log(`Height: ${entry.contentRect.height}px`);
-            debugger;
             const retroWindowHeader =
                 document.getElementById(retroWindowHeaderId);
 
@@ -103,7 +101,6 @@ const mainContentId = `mainContent-${dragId}`;
     // To disconnect all observations:
     // resizeObserver.disconnect();
 
-    debugger;
 
     document.getElementById(retroWindowHeaderId).addEventListener('mousedown', (e) => {
         const thisWindow = document.getElementById(draggableId);
@@ -114,7 +111,6 @@ const mainContentId = `mainContent-${dragId}`;
         dottedPastWindow.style.height = `${thisWindow.clientHeight}px`;
         dottedPastWindow.style.position = 'absolute';
         dottedPastWindow.style.zIndex = 1;
-        debugger;
         dottedPastWindow.style.transform = thisWindow.style.transform;
         dottedPastWindow.style.border = '2px dotted rgb(166,166,166)';
     })
