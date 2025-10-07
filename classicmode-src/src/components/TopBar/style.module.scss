@@ -15,32 +15,6 @@
     }
 }
 
-// .linkedInButton {
-//     color: green;
-
-//     background: linear-gradient(to right, 
-//     #00497d, /* Darker LinkedIn Blue */
-//     #0077B5, /* Official LinkedIn Blue */
-//     #00497d, /* Darker LinkedIn Blue */
-//     #000000  /* Black */
-//   );
-//   background-size: 300% 100%;
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-//   transition: background-position 0.5s ease-in-out;
-
-//   &:hover {
-//     animation: shimmer 2s infinite ease-in-out;
-//   }
-
-//   @keyframes linkedinShimmer {
-//     0% { background-position: 0% 50%; }
-//     50% { background-position: 100% 50%; }
-//     100% { background-position: 0% 50%; }
-//   }
-
-// }
-
 @keyframes shimmer {
 
     0%,
@@ -70,6 +44,7 @@
     box-sizing: border-box;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+
 
     .leftBar {
         display: flex;
@@ -147,6 +122,7 @@
     padding-top: 0.6rem;
     padding-bottom: 0.3rem;
     cursor: pointer;
+
     &:hover {
         background: transparent;
         color: black;
@@ -185,3 +161,10 @@
     align-items: center;
     display: flex;
 }
+
+    @media screen and (max-width: 568px) {
+        macintosh-menu span {
+            font-size: 0.8333rem;
+        }
+        
+    }

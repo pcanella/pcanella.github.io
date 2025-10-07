@@ -22,7 +22,10 @@ div[aria-hidden="true"] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // height: 900px;
+
+    @media screen and (max-width: 568px) {
+        overflow: hidden;
+    }
 
     .mainHeader {
 
@@ -162,7 +165,7 @@ div[aria-hidden="true"] {
 }
 
 .openAppDialog {
-   position: fixed;
+    position: fixed;
     z-index: 9999;
     display: flex;
     top: 50%;
@@ -175,6 +178,6 @@ div[aria-hidden="true"] {
 }
 
 .dialogBoxFooter {
-    display:flex;
+    display: flex;
     justify-content: flex-end;
 }

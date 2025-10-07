@@ -162,6 +162,10 @@ body {
 #mainContent {
     height: 100%;
 
+    @media screen and (max-width:768px) {
+        overflow: hidden;
+    }
+
     .body {
         height: 100%;
         overflow: scroll;
