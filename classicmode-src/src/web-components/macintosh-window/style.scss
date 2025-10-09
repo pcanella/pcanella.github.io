@@ -135,6 +135,24 @@ div::-webkit-scrollbar-track {
             &::-webkit-scrollbar {
                 background: white;
             }
+
+            &::-webkit-scrollbar-track {
+                background: none;
+                background-size: 6px 6px;
+                /* Smaller dots */
+                background-position: 0 0, 3px 9px;
+                /* Staggered effect */
+                background-color: transparent;
+                /* Track background */
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: transparent;
+                border-right: none;
+                box-sizing: content-box;
+                width: 20px;
+               border: none;
+            }
         }
 
         &__background {

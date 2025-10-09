@@ -15,8 +15,11 @@ const topMenuItems = {
         { title: 'Dev.to Blog', href: 'https://dev.to/pcanella' },
     ],
     pc: [
-        { title: 'About this Site...', onClick: () => {alert('hi')} },
-        { title: 'Life Details', onClick: () => {alert('hi')} },
+        { title: 'About this Site...', id: 'aboutThisSite', onClick: () => {alert('hi')} },
+        // { title: 'Life Details', id: 'lifeDetails', onClick: () => {alert('hi')} },
+    ],
+    special: [
+         { title: 'Back to Modern Site', href: 'https://www.patcanella.com' },
     ]
 }
 

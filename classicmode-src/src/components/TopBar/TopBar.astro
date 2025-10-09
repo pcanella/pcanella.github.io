@@ -6,14 +6,6 @@ import topMenuItems from "../../models/TopMenuItems";
 
 <nav class={styles.topBarContainer} class="topBar">
     <div class={styles.leftBar}>
-        <!-- <button class={styles.logoButton}
-            ><img
-                alt="Welcome to Patrick Canella's Retro site!"
-                class={styles.pcLogoImage}
-                src="src/classic/assets/patretrologo.png"
-            />
-        </button> -->
-
         <ul class={styles.navBar}>
             <macintosh-menu>
                 <div class={styles.logoButtonContainer} slot="menuTitle">
@@ -27,7 +19,7 @@ import topMenuItems from "../../models/TopMenuItems";
                 </div>
                 {
                     topMenuItems.pc.map((item) => (
-                        <macintosh-menu-item slot="menuList" href={item.href} onClick={item?.onClick}>
+                        <macintosh-menu-item slot="menuList" href={item.href} id={item.id}>
                             {item.title}
                         </macintosh-menu-item>
                     ))
@@ -76,6 +68,17 @@ import topMenuItems from "../../models/TopMenuItems";
                 }
             </macintosh-menu>
 
+             <macintosh-menu>
+                <span slot="menuTitle">Special</span>
+                {
+                    topMenuItems.special.map((item) => (
+                        <macintosh-menu-item slot="menuList" href={item.href}>
+                            {item.title}
+                        </macintosh-menu-item>
+                    ))
+                }
+            </macintosh-menu>
+
        
         </ul>
     </div>
@@ -92,14 +95,26 @@ import topMenuItems from "../../models/TopMenuItems";
 
 <script>
     const macMenus = document.querySelectorAll("macintosh-menu");
+    const aboutMeWindow = document.getElementById('aboutwindow');
+
+
+    document.querySelector('#aboutThisSite')?.addEventListener('click', () => {
+        aboutMeWindow?.setAttribute('aria-hidden', 'false');
+        window.selectionHelper('aboutwindow');
+        document.querySelector('#aboutcontenteditable').click();
+
+    })
 
     macMenus.forEach((item) => {
         item.addEventListener("menu-clicked", (event) => {
+            debugger;
             macMenus.forEach((macMenu) => {
                 // Close all other menus
                 if (macMenu !== event.currentTarget) {
                     macMenu.setAttribute("open", "false");
                 }
+
+                // if (macMenu)
             });
 
             // Toggle the clicked one (optional if handled internally)

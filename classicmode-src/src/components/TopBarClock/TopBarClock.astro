@@ -1,9 +1,13 @@
 ---
 import styles from "./style.module.scss";
+const today = new Date();
+const days = ['Sun','Mon','Tues','Wed','Thur','Fri','Sat'];
+const thisDay = days[today.getDay()];
 ---
 
 <div class={styles.topClockBar}>
     <div id="clock" class={styles.clock}>
+        <span class={styles.dayOfWeek}>{thisDay}</span>
         <span id="hours">--</span>
         <span class={styles.colon}>:</span>
         <span id="minutes">--</span>
