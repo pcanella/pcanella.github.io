@@ -19,7 +19,8 @@ const topMenuItems = {
         // { title: 'Life Details', id: 'lifeDetails', onClick: () => {alert('hi')} },
     ],
     special: [
-         { title: 'Back to Modern Site', href: 'https://www.patcanella.com' },
+        //  { title: 'Sleep...', id:'sleep' },
+         { title: 'Back to Modern Site', id:'backToModenSite', href: 'https://www.patcanella.com' },
     ]
 }
 

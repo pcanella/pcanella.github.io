@@ -31,6 +31,10 @@ import styles from "./style.module.scss";
 	</div>
 
 	<div id="mainContent" aria-hidden={isStartingUp.value}>
+		<!-- <img
+			src={``}
+			width="100"
+		/> -->
 		<TopBar />
 		<main class="mainWindow">
 			<macintosh-dialog-box
@@ -147,16 +151,14 @@ import styles from "./style.module.scss";
 					<h2 class={styles.mainHeader}>About this site</h2>
 
 					<div id="aboutcontenteditable" class={styles.about}>
-						<p
-							>This site recreates the classic Macintosh System
-							7.5 aesthetic entirely with HTML, CSS, and native
-							Web Components, all stitched together using Astro.
-							No heavy frameworks.
+						<p>
+							This site recreates the classic Macintosh System 7.5
+							aesthetic entirely with HTML, CSS, and native Web
+							Components, all stitched together using Astro. No
+							heavy frameworks.
 
 							<span class={styles.blinkingCursor}></span>
-					</p>
-
-						
+						</p>
 					</div>
 				</section>
 			</macintosh-window>

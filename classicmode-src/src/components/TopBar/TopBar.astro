@@ -72,7 +72,7 @@ import topMenuItems from "../../models/TopMenuItems";
                 <span slot="menuTitle">Special</span>
                 {
                     topMenuItems.special.map((item) => (
-                        <macintosh-menu-item slot="menuList" href={item.href}>
+                        <macintosh-menu-item slot="menuList" id={item.id} href={item.href}>
                             {item.title}
                         </macintosh-menu-item>
                     ))
