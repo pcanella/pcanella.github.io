@@ -134,10 +134,11 @@
 }
 
 .logoButtonContainer {
-    height: 25px;
+    height: 20px;
     width: 29px;
     margin-right: 1rem;
     text-align: center;
+    position: relative;
 }
 
 .logoButton {
@@ -146,7 +147,7 @@
     height: 29px;
     padding-left: 0;
     margin-left: 10px;
-
+    position: absolute;
     .pcLogoImage {
         margin-top: 0px;
         background: transparent;
@@ -162,9 +163,9 @@
     display: flex;
 }
 
-    @media screen and (max-width: 568px) {
-        macintosh-menu span {
-            font-size: 0.8333rem;
-        }
-        
+@media screen and (max-width: 568px) {
+    macintosh-menu span {
+        font-size: 0.8333rem;
     }
+
+}

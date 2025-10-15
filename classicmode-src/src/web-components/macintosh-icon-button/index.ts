@@ -60,22 +60,6 @@ class MacintoshIconButton extends HTMLElement {
       iconContainerEl?.setAttribute('data-type', 'image')
     }
 
-    // const linkTo = this?.getAttribute('href');
-
-    // // const thisPossibleLink = this.item.querySelector('a');
-
-    // if (linkTo) {
-    //     // this.removeAttribute('hidden');
-    //     this.item.setAttribute('href', linkTo);
-    //     this.item.setAttribute('role', 'link');
-    // }
-
-    // // const button = shadow?.querySelector(menuButtonClassName);
-    // // const dropdown = shadow?.querySelector('.macintosh-menu__content');
-    // // this.button = this.shadow?.querySelector(menuButtonClassName);
-    // // this.content = this.shadow?.querySelector('.macintosh-menu__content');
-
-    // this.addEventListener('click', this.handleClick)
     this.addEventListener('dblclick', this.handleDoubleClick)
 
   }

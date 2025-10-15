@@ -31,10 +31,6 @@ import styles from "./style.module.scss";
 	</div>
 
 	<div id="mainContent" aria-hidden={isStartingUp.value}>
-		<!-- <img
-			src={``}
-			width="100"
-		/> -->
 		<TopBar />
 		<main class="mainWindow">
 			<macintosh-dialog-box
@@ -112,7 +108,7 @@ import styles from "./style.module.scss";
 				id="myappswindow"
 				data-header="My Apps"
 				x={400}
-				y={-50}
+				y={40}
 				width={"400px"}
 				aria-hidden="true"
 				data-active="false"
@@ -168,16 +164,88 @@ import styles from "./style.module.scss";
 
 <script>
 	import { isPatricksMacOpen, isStartingUp, progress } from "../../store.js";
-
-	const testwindow = document.getElementById("welcomewindow");
+	const welcomeWindow = document.getElementById("welcomewindow");
 	const myAppsWindow = document.getElementById("myappswindow");
 	const dialogBox = document.getElementById("openappdialog");
-	const aboutWindow = document.getElementById("aboutwindow");
+	const folderEl = document.querySelector("[name='folder']");
+	const hardDriveEl = document.querySelector("[name='hard-drive']");
+	const macWindow = document.getElementById("draggable-macintoshhdwindow");
+	const fhAppEl = document.querySelector("#fishharmonyicon");
 	const klickyTrackerIconEl = document.getElementById("klickytrackericon");
-	testwindow?.addEventListener("macintosh:window-close-button", () => {
-		var audio = new Audio("/classic/assets/sounds/Bip.wav");
-		audio.play();
+
+	// function getLandscapeCenter() {
+	// 	const isLandscape = window.matchMedia(
+	// 		"(orientation: landscape)",
+	// 	).matches;
+	// 	const width = window.innerWidth;
+	// 	const height = window.innerHeight;
+
+	// 	// If not landscape, swap width/height to simulate landscape layout
+	// 	const center = {
+	// 		x: isLandscape ? width / 2 : height / 2,
+	// 		y: isLandscape ? height / 2 : width / 2,
+	// 	};
+
+	// 	return center;
+	// }
+
+	if (window.matchMedia("(orientation: landscape)").matches || window.matchMedia("(orientation: portrait)").matches) {
+		welcomeWindow?.setAttribute("x", String(0));
+		welcomeWindow?.setAttribute("y", String(0));
+	}
+
+	let lastTap = 0;
+	const doubleTapDelay = 300; // milliseconds
+	const macFolders = [
+		{ folderEl: hardDriveEl, windowEl: welcomeWindow },
+		{ folderEl: folderEl, windowEl: myAppsWindow },
+	];
+	const macWindows = [welcomeWindow, myAppsWindow, macWindow];
+
+	const doubleClickFolderHelper = (folderElement, windowElement) => {
+		if (windowElement.getAttribute("data-active") === "true") {
+			return;
+		}
+		folderElement?.blur();
+		folderElement.setAttribute("aria-selected", "true");
+		windowElement?.setAttribute("aria-hidden", "false");
+		const currentId = windowElement?.id;
+		window.selectionHelper(currentId);
+	};
+
+	macWindows.forEach((item) => {
+		item?.addEventListener("macintosh:window-close-button", () => {
+			item?.setAttribute("aria-hidden", "true");
+			var audio = new Audio("/classic/assets/sounds/Bip.wav");
+			audio.play();
+		});
 	});
+
+	macFolders.forEach(({ folderEl, windowEl }) => {
+		folderEl?.addEventListener("dblclick", (event) => {
+			doubleClickFolderHelper(folderEl, windowEl);
+		});
+
+		folderEl?.addEventListener("touchend", (event) => {
+			handleDoubleTap(event, () => {
+				doubleClickFolderHelper(folderEl, windowEl);
+			});
+		});
+	});
+
+	const handleDoubleTap = (event, callback) => {
+		const currentTime = new Date().getTime();
+		const tapLength = currentTime - lastTap;
+
+		if (tapLength < doubleTapDelay && tapLength > 0) {
+			// ✅ Double tap detected
+			console.log("Double tap detected!", event);
+			callback();
+			event.preventDefault();
+		}
+
+		lastTap = currentTime;
+	};
 
 	document.querySelector("#cancelbtn")?.addEventListener("click", () => {
 		dialogBox?.setAttribute("aria-hidden", "true");
@@ -197,8 +265,6 @@ import styles from "./style.module.scss";
 		);
 	});
 
-	// aboutWindow?.addEventListener('click')
-
 	window.selectionHelper = (currentId) => {
 		document.querySelectorAll("macintosh-window").forEach((el) => {
 			if (el.id !== currentId) {
@@ -217,9 +283,6 @@ import styles from "./style.module.scss";
 			window.selectionHelper(currentId);
 		});
 	});
-	const macWindow = document.getElementById("draggable-macintoshhdwindow");
-	const hdEl = document.querySelector("[name='hard-drive']");
-	const fhAppEl = document.querySelector("#fishharmonyicon");
 
 	klickyTrackerIconEl?.addEventListener("dblclick", () => {
 		dialogBox?.setAttribute("aria-hidden", "false");
@@ -232,19 +295,6 @@ import styles from "./style.module.scss";
 			"https://apps.apple.com/us/app/fish-harmony/id1309770017",
 			"_blank",
 		);
-	});
-
-	hdEl?.addEventListener("dblclick", (event) => {
-		macWindow?.setAttribute("aria-hidden", "false");
-	});
-
-	const folderEl = document.querySelector("[name='folder']");
-
-	folderEl?.addEventListener("dblclick", (event) => {
-		folderEl?.blur();
-		myAppsWindow?.setAttribute("aria-hidden", "false");
-		const currentId = myAppsWindow.id;
-		window.selectionHelper(currentId);
 	});
 
 	function fakeLoad() {

@@ -19,7 +19,6 @@
     }
 
     &:focus {
-        // background: red;
         .macintosh-icon-button__icon-container[data-type="image"] {
             filter: brightness(0.7);
         }

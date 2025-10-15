@@ -103,6 +103,13 @@ div::-webkit-scrollbar-track {
     /* Track background */
 }
 
+:host {
+    touch-action: none;
+    /* set this dynamically or via a class */
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 :host([aria-hidden="true"]) {
     display: none;
     /* higher specificity than :host, so it wins */
@@ -151,7 +158,7 @@ div::-webkit-scrollbar-track {
                 border-right: none;
                 box-sizing: content-box;
                 width: 20px;
-               border: none;
+                border: none;
             }
         }
 

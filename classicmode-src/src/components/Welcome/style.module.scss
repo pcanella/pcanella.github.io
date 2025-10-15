@@ -18,6 +18,7 @@ div[aria-hidden="true"] {
 }
 
 .mainWindow {
+    overscroll-behavior: contain;
     display: flex;
     flex-direction: column;
     justify-content: center;
