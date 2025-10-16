@@ -85,6 +85,13 @@
     margin: 0;
     padding-left: 0;
 
+    @media screen and (max-width: 600px) {
+
+        macintosh-menu:last-child {
+            display: none;
+        }
+    }
+
     li {
         list-style-type: none;
         padding-left: 0.5rem;
@@ -148,6 +155,7 @@
     padding-left: 0;
     margin-left: 10px;
     position: absolute;
+
     .pcLogoImage {
         margin-top: 0px;
         background: transparent;
@@ -161,6 +169,10 @@
 .rightBar {
     align-items: center;
     display: flex;
+
+    @media screen and (max-width: 600px) {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 568px) {
