@@ -107,14 +107,11 @@ import topMenuItems from "../../models/TopMenuItems";
 
     macMenus.forEach((item) => {
         item.addEventListener("menu-clicked", (event) => {
-            debugger;
             macMenus.forEach((macMenu) => {
                 // Close all other menus
                 if (macMenu !== event.currentTarget) {
                     macMenu.setAttribute("open", "false");
                 }
-
-                // if (macMenu)
             });
 
             // Toggle the clicked one (optional if handled internally)
