@@ -77,18 +77,18 @@ div[aria-hidden="true"] {
     height: 100%;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
-    display:flex;
+    display: flex;
 
 }
 
-  .blinkingCursor {
-        animation: blink-caret 1s steps(1, end) infinite;
-        width: 3px;
-        display: block;
-        height: 15px;
-        background: black;
-        margin-top: 1rem;
-    }
+.blinkingCursor {
+    animation: blink-caret 1s steps(1, end) infinite;
+    width: 3px;
+    display: block;
+    height: 15px;
+    background: black;
+    margin-top: 1rem;
+}
 
 @keyframes blink-caret {
 
@@ -149,6 +149,7 @@ div[aria-hidden="true"] {
         font-family: "EB Garamond", serif;
         font-size: 160px;
         padding-right: 20px;
+
     }
 
     .patOsText2 {
@@ -216,4 +217,11 @@ div[aria-hidden="true"] {
 .dialogBoxFooter {
     display: flex;
     justify-content: flex-end;
+}
+
+
+.patOsText {
+    @media screen and (max-width: 760px) {
+        text-align: center;
+    }
 }

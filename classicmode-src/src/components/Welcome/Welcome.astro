@@ -173,27 +173,6 @@ import styles from "./style.module.scss";
 	const fhAppEl = document.querySelector("#fishharmonyicon");
 	const klickyTrackerIconEl = document.getElementById("klickytrackericon");
 
-	// function getLandscapeCenter() {
-	// 	const isLandscape = window.matchMedia(
-	// 		"(orientation: landscape)",
-	// 	).matches;
-	// 	const width = window.innerWidth;
-	// 	const height = window.innerHeight;
-
-	// 	// If not landscape, swap width/height to simulate landscape layout
-	// 	const center = {
-	// 		x: isLandscape ? width / 2 : height / 2,
-	// 		y: isLandscape ? height / 2 : width / 2,
-	// 	};
-
-	// 	return center;
-	// }
-
-	if (window.matchMedia("(orientation: landscape)").matches || window.matchMedia("(orientation: portrait)").matches) {
-		welcomeWindow?.setAttribute("x", String(0));
-		welcomeWindow?.setAttribute("y", String(0));
-	}
-
 	let lastTap = 0;
 	const doubleTapDelay = 300; // milliseconds
 	const macFolders = [
@@ -219,6 +198,18 @@ import styles from "./style.module.scss";
 			var audio = new Audio("/classic/assets/sounds/Bip.wav");
 			audio.play();
 		});
+
+		if (window.matchMedia("(orientation: landscape)").matches) {
+			item?.setAttribute("x", String(100));
+			item?.setAttribute("y", String(0));
+			item?.setAttribute("width", String(400));
+		}
+
+		if (window.matchMedia("(orientation: portrait)").matches) {
+			item?.setAttribute("x", String(100));
+			item?.setAttribute("y", String(100));
+			item?.setAttribute("width", String(400));
+		}
 	});
 
 	macFolders.forEach(({ folderEl, windowEl }) => {
