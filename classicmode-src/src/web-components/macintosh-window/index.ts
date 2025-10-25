@@ -7,7 +7,7 @@ const template = document.createElement('template');
 template.innerHTML = `
   <style>${styles}</style>
   <div class="macintosh-window__wrapper">
-    <div class="macintosh-window__window" aria-hidden="false" data-x="0" data-y="0" style="min-width: 300px;">
+    <div class="macintosh-window__window" aria-hidden="false" data-x="0" data-y="0">
       <div class="macintosh-window__header">
         <div class="macintosh-window__background">
           <div class="macintosh-window__decor-line">
@@ -49,8 +49,12 @@ export class MacintoshWindow extends HTMLElement {
     private bodyEl?: HTMLElement;
     private mainContentEl?: HTMLElement;
     private leftMenuButtonEl?: HTMLElement;
+    private rightMenuButtonEl?: HTMLElement;
+    private isActive: boolean = false
+    private interact: any;
+    private isDragging: boolean = false;
     static get observedAttributes() {
-        return ['header', 'x', 'y', 'width', 'height', 'aria-hidden', 'drag-id'];
+        return ['header', 'x', 'y', 'width', 'height', 'aria-hidden', 'drag-id','data-active'];
     }
 
     constructor() {
@@ -66,9 +70,38 @@ export class MacintoshWindow extends HTMLElement {
         this.resizeObserver?.disconnect();
     }
 
-    attributeChangedCallback() {
-        this.render();
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (!this.shadowRoot) return;
+                debugger;
+
+        switch (name) {
+            case 'width':
+            case 'height':
+                this.rootEl?.style.setProperty(name, `${newValue}px`);
+                this.rootEl?.style.setProperty(`min-${name}`, `${newValue}px`);
+                break;
+            case 'x':
+            case 'y':
+                this.position[name] = Number(newValue);
+
+                if (this.rootEl) {
+                this.rootEl.style.transform =
+                    `translate(${this.position.x}px, ${this.position.y}px)`;
+                }
+                break;
+            // etc.
+            case 'data-active':
+                if (newValue === "true") {
+                    this.interact?.draggable(true);
+                } else {
+                    this.interact?.draggable(false);
+                }
+                break;
+            default:
+                this.render(); // only rerender for big changes
+        }
     }
+
 
     private render() {
         this.shadow.innerHTML = '';
@@ -79,15 +112,17 @@ export class MacintoshWindow extends HTMLElement {
         const dragId = this.getAttribute('drag-id') ?? '0';
         const x = Number(this.getAttribute('x') ?? 0);
         const y = Number(this.getAttribute('y') ?? 0);
-        const width = this.getAttribute('width') ?? '300px';
+        const width = (this.getAttribute('width') ?? '300') + 'px';
+        const height = (this.getAttribute('height') ?? '300') + 'px';
         const hidden = this.getAttribute('aria-hidden') === 'true';
         const active = this.getAttribute('data-active') ?? "false";
-
+        this.isActive = active === 'true';
         this.rootEl = this.shadow.querySelector('.macintosh-window__window') as HTMLElement;
         this.headerEl = this.shadow.querySelector('.macintosh-window__header') as HTMLElement;
         this.bodyEl = this.shadow.querySelector('.macintosh-window__body') as HTMLElement;
         this.mainContentEl = this.shadow.querySelector('.macintosh-window__main-content') as HTMLElement;
         this.leftMenuButtonEl = this.shadow.querySelector('.macintosh-window__top-button--left') as HTMLElement
+        this.rightMenuButtonEl = this.shadow.querySelector('.macintosh-window__top-button--right') as HTMLElement
 
         const draggableId = `macintosh-window-${dragId}`;
         const headerId = `macintosh-window__header-${dragId}`;
@@ -103,6 +138,8 @@ export class MacintoshWindow extends HTMLElement {
             this.rootEl.ariaHidden = String(hidden);
             this.rootEl.style.width = width;
             this.rootEl.style.minWidth = width;
+            this.rootEl.style.height = height;
+            this.rootEl.style.minHeight = height;
             this.rootEl.dataset.x = String(x);
             this.rootEl.dataset.y = String(y);
             this.rootEl.dataset.active = active;
@@ -133,7 +170,9 @@ export class MacintoshWindow extends HTMLElement {
         this.resizeObserver = new ResizeObserver((entries) => {
             for (const entry of entries) {
                 const w = entry.contentRect.width;
+                const h = entry.contentRect.height;
                 this.headerEl!.style.width = `${w + 19.5}px `;
+                this.headerEl!.style.height = `${19.5}px `;
             }
         });
 
@@ -145,7 +184,7 @@ export class MacintoshWindow extends HTMLElement {
 
         const allowFromEl = this.shadow.getElementById(headerId) as HTMLElement | null;
 
-        interact(this.rootEl).draggable({
+        this.interact = interact(this.rootEl).draggable({
             allowFrom: allowFromEl ?? undefined,
             modifiers: [
                 interact.modifiers.restrictRect({
@@ -174,6 +213,12 @@ export class MacintoshWindow extends HTMLElement {
         if (!headerEl || !draggableEl) return;
 
         const onMouseDown = () => {
+            this.rootEl?.classList.add('is-dragging');
+            this.isDragging = true;
+            // if (!this.isActive) {
+            //     this.interact.draggable(false)
+            //     return;
+            // }
             const ghost = document.createElement('div');
             ghost.className = 'macintosh-window__ghost';
             ghost.style.width = `${draggableEl.clientWidth}px`;
@@ -182,17 +227,57 @@ export class MacintoshWindow extends HTMLElement {
             ghost.style.zIndex = '1';
             ghost.style.transform = draggableEl.style.transform;
             ghost.style.border = '2px dotted rgb(166,166,166)';
-            document.querySelector('main')?.appendChild(ghost);
+            // document.querySelector('main')?.appendChild(ghost);
         };
 
         const onMouseUp = () => {
+            this.isDragging = false;
+
+
+            this.rootEl?.classList.remove('is-dragging');
+
+            if (!this.isActive) return;
             document.querySelectorAll('.macintosh-window__ghost').forEach((g) => g.remove());
         };
+
+        this.rootEl?.addEventListener('click', (event) => {
+            // debugger;
+            // if (!this.isActive) {
+            //     this.draggable.draggable(false);
+            // } else {
+            //     this.draggable.draggable(true);
+            // }
+
+            if ((event.target?.isEqualNode(this.leftMenuButtonEl) || event.target?.isEqualNode(this.rightMenuButtonEl)) && this.isActive) {
+                event?.stopPropagation();
+                return;
+            }
+
+            this.dispatchEvent(new CustomEvent('macintosh:window-click', {
+                bubbles: true, // allows the event to bubble up through the DOM
+                composed: true, // allows the event to pass through shadow DOM boundaries
+                detail: {
+                    message: 'window was clicked!!',
+                    timestamp: Date.now()
+                }
+            }));
+        })
 
         headerEl.addEventListener('mousedown', onMouseDown);
         headerEl.addEventListener('mouseup', onMouseUp);
         this.leftMenuButtonEl?.addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('macintosh:window-close-button', {
+                bubbles: true, // allows the event to bubble up through the DOM
+                composed: true, // allows the event to pass through shadow DOM boundaries
+                detail: {
+                    message: 'button was clicked!!',
+                    timestamp: Date.now()
+                }
+            }));
+        })
+
+        this.rightMenuButtonEl?.addEventListener('click', () => {
+            this.dispatchEvent(new CustomEvent('macintosh:window-expand-button', {
                 bubbles: true, // allows the event to bubble up through the DOM
                 composed: true, // allows the event to pass through shadow DOM boundaries
                 detail: {

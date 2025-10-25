@@ -1,6 +1,5 @@
 @use '../../styles/mixins' as *;
 
-
 :global(#mainContent) {
     height: 100%;
     width: 100%;
@@ -182,9 +181,8 @@ div::-webkit-scrollbar-track {
 }
 
 :host {
-    // background: red;
-    width: 200px;
-    height: 200px;
+    min-width: 200px;
+    min-height: 200px;
     display: block;
 
     .macintosh-window {
@@ -202,6 +200,17 @@ div::-webkit-scrollbar-track {
             max-height: 350px;
             border-left: none;
             border-radius: 3px;
+
+            // &.is-dragging {
+            //     &::before {
+            //         content: "";
+            //         background: red;
+            //         width: 300px;
+            //         height: 400px;
+            //         position:fixed;
+            //         border: 2px dotted rgb(166,166,166);
+            //     }
+            // }
 
             &[aria-hidden="true"] {
                 display: none;
@@ -246,6 +255,7 @@ div::-webkit-scrollbar-track {
             position: sticky;
             top: 0;
             background: white;
+            cursor: pointer;
             border-right: 4px solid black;
             border-top: 2px solid black;
             border-left: 1px solid black;

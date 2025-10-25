@@ -1,0 +1,40 @@
+.toaster {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: auto;
+    pointer-events: none;
+    animation: flyToaster 20s linear infinite;
+    will-change: transform;
+}
+
+@keyframes flyToaster {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-100vw, 100vh) rotate(-15deg);
+        opacity: 0;
+    }
+}
+
+body.is-loading * {
+    cursor: url('/classic/assets/loadingwatch.png') 16 16, auto !important;
+}
+
+
+small {
+    font-size: 10px;
+    padding-bottom: 5px;
+}
+
+.mainWindow {
+    height: 100%;
+}

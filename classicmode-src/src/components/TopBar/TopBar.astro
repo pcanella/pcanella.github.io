@@ -96,7 +96,13 @@ import topMenuItems from "../../models/TopMenuItems";
 <script>
     const macMenus = document.querySelectorAll("macintosh-menu");
     const aboutMeWindow = document.getElementById('aboutwindow');
+    const mainWindow = document.querySelector('.mainWindow');
 
+    mainWindow?.addEventListener('click', () => {
+        macMenus.forEach(node => {
+            node.setAttribute('open', 'false');
+        })
+    })
 
     document.querySelector('#aboutThisSite')?.addEventListener('click', () => {
         aboutMeWindow?.setAttribute('aria-hidden', 'false');
@@ -104,6 +110,13 @@ import topMenuItems from "../../models/TopMenuItems";
         document.querySelector('#aboutcontenteditable').click();
 
     })
+
+    document.querySelector('#sleep')?.addEventListener('click', () => {
+        document.querySelector('#container')?.setAttribute('aria-hidden', 'true');
+        document.querySelector('#sleepMode')?.setAttribute('aria-hidden', 'false');
+    });
+
+    
 
     macMenus.forEach((item) => {
         item.addEventListener("menu-clicked", (event) => {

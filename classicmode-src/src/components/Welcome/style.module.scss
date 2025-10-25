@@ -5,6 +5,27 @@ main {
     // justify-content: center;
 }
 
+macintosh-window {
+    position: absolute;
+}
+
+.sleepMode {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    overflow: hidden;
+
+
+
+    .sprite {
+        position: absolute;
+        pointer-events: none;
+        will-change: transform;
+        /* hint compositor */
+        backface-visibility: hidden;
+    }
+}
+
 .container {
     height: 100%;
 
@@ -17,7 +38,23 @@ div[aria-hidden="true"] {
     display: none;
 }
 
+.stage {
+    // // position: relative;
+    // width: 100%;
+    // height: 100%;
+    // overflow: hidden;
+    position:relative; width:100vw; height:100vh; overflow:hidden;
+}
+
+.myAppsWindow {
+    .mainWindow {
+        justify-content: flex-start;
+    }
+}
+
 .mainWindow {
+    width: 100%;
+    height: 100%;
     overscroll-behavior: contain;
     display: flex;
     flex-direction: column;
@@ -45,10 +82,6 @@ div[aria-hidden="true"] {
         margin-top: 0.3rem;
         margin-bottom: 0.3rem;
         font-size: 14px;
-    }
-
-    img {
-        // border: 1px solid black;
     }
 
     div {
